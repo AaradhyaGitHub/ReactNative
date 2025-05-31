@@ -1,64 +1,34 @@
+import { StatusBar } from "expo-status-bar";
+import { Button, StyleSheet, Text, TextInput, View } from "react-native";
 import React from "react";
-import { Text, View } from "react-native";
 
 export default function App() {
   return (
-    <View
-      style={{
-        padding: 50,
-        flexDirection: "row",
-        width: "80%",
-        height: 300,
-        justifyContent: "space-around",
-        alignItems: "stretch",
-        backgroundColor: "rgba(247, 255, 142, 0.595)",
-        
-      }}
-    >
-      <View
-        style={{
-          backgroundColor: "rgba(255, 103, 79, 0.832)",
-          flex:1,
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text>1</Text>
+    <View style={styles.appContainer}>
+      <View style={styles.inputContainer}>
+        <TextInput style={styles.textInput} placeholder="Your goals" />
+        <Button title="Add Goal" />
       </View>
-      <View
-        style={{
-          backgroundColor: " rgb(98, 145, 255)",
-          flex:1,
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text>2</Text>
-      </View>
-      <View
-        style={{
-          backgroundColor: "rgb(79, 255, 176)",
-          flex:1,
-          justifyContent: "center",
-          alignItems: "center"
-        }}
-      >
-        <Text>3</Text>
+      <View>
+        <Text>List of items</Text>
       </View>
     </View>
   );
 }
 
-{
-  /*
-_______________________________________________
-|Direction  |      Axis       |   Cross-Axis  |
-|-----------|-----------------|---------------|
-|Row        | Left to Right → |Top to Bottom ↓|
-|Column     | Top to Bottom ↓ |Left to Right →|
-|Row-Reverse| Right to Left ← |Bottom to Top ↑|
-|Col-Reverse| Bottom to Top ↑ |Right to Left ←|
-|______________________________________________ 
-
-*/
-}
+const styles = StyleSheet.create({
+  appContainer: {
+    padding: 50
+  },
+  inputContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between"
+  },
+  textInput: {
+    borderWidth: 1,
+    borderColor: "#15714b",
+    width: "80%",
+    marginRight: 8,
+    padding: 6
+  }
+});
