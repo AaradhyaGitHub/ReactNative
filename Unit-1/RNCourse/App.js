@@ -2,12 +2,13 @@ import React from "react";
 
 import { StatusBar } from "expo-status-bar";
 import { useState } from "react";
-import { StyleSheet, View, FlatList } from "react-native";
+import { StyleSheet, View, FlatList, Button } from "react-native";
 
 import GoalItem from "./components/GoalItem";
 import GoalInput from "./components/GoalInput";
 
 export default function App() {
+  const [modalIsVisible, setModalIsVisible] = useState(false);
   const [listofGoals, setListofGoals] = useState([]);
 
   function addGoalHandler(enteredGoalText) {
@@ -21,9 +22,17 @@ export default function App() {
       return currentListofGoals.filter((goal) => goal.id !== id);
     });
   }
+  function startAddGoalHandler() {
+    setModalIsVisible(true);
+  }
   return (
     <View style={styles.appContainer}>
-      <GoalInput onAddGoal={addGoalHandler} />
+      <Button
+        title="Add New Goal"
+        color={"#0cbc4935"}
+        onPress={startAddGoalHandler}
+      />
+      {<GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} />}
 
       <View style={styles.goalsContainer}>
         <FlatList
