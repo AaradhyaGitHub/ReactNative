@@ -1,4 +1,4 @@
-import { StyleSheet, View, TextInput, Button } from "react-native";
+import { StyleSheet, View, TextInput, Button, Pressable } from "react-native";
 import { useState } from "react";
 
 export default function GoalInput(props) {
@@ -12,6 +12,7 @@ export default function GoalInput(props) {
     props.onAddGoal(enteredGoalText);
     setEnteredGoalText("");
   }
+
 
   return (
     <View style={styles.inputContainer}>
