@@ -1,4 +1,5 @@
 import { StyleSheet, View, Text, Pressable } from "react-native";
+import React from "react";
 
 export default function GoalItem(props) {
   return (
