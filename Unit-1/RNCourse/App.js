@@ -16,8 +16,10 @@ export default function App() {
       { text: enteredGoalText, id: Math.random().toString() }
     ]);
   }
-  function deleteGoalHandler(){
-    console.log('Item Selected to DELETE')
+  function deleteGoalHandler(id) {
+    setListofGoals((currentListofGoals) => {
+      return currentListofGoals.filter((goal) => goal.id !== id);
+    });
   }
   return (
     <View style={styles.appContainer}>
@@ -27,7 +29,13 @@ export default function App() {
         <FlatList
           data={listofGoals}
           renderItem={(itemData) => {
-            return <GoalItem text={itemData.item.text} onDeleteItem={deleteGoalHandler}/>;
+            return (
+              <GoalItem
+                text={itemData.item.text}
+                onDeleteItem={deleteGoalHandler}
+                id={itemData.item.id}
+              />
+            );
           }}
           keyExtractor={(item, index) => {
             return item.id;
