@@ -34,40 +34,43 @@ export default function App() {
     setModalIsVisible(true);
   }
   return (
-    <View style={styles.appContainer}>
-      <View style={styles.button}>
-        <Button
-          title="➕  Add Goal"
-          color={"#0cbc67"}
-          onPress={startAddGoalHandler}
-        />
-      </View>
-      {
-        <GoalInput
-          visible={modalIsVisible}
-          onAddGoal={addGoalHandler}
-          onCancel={endAddGoalHandler}
-        />
-      }
+    <>
+      <StatusBar style="dark" />
+      <View style={styles.appContainer}>
+        <View style={styles.button}>
+          <Button
+            title="＋ Add Goal"
+            color={"#0cbc67"}
+            onPress={startAddGoalHandler}
+          />
+        </View>
+        {
+          <GoalInput
+            visible={modalIsVisible}
+            onAddGoal={addGoalHandler}
+            onCancel={endAddGoalHandler}
+          />
+        }
 
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={listofGoals}
-          renderItem={(itemData) => {
-            return (
-              <GoalItem
-                text={itemData.item.text}
-                onDeleteItem={deleteGoalHandler}
-                id={itemData.item.id}
-              />
-            );
-          }}
-          keyExtractor={(item, index) => {
-            return item.id;
-          }}
-        />
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={listofGoals}
+            renderItem={(itemData) => {
+              return (
+                <GoalItem
+                  text={itemData.item.text}
+                  onDeleteItem={deleteGoalHandler}
+                  id={itemData.item.id}
+                />
+              );
+            }}
+            keyExtractor={(item, index) => {
+              return item.id;
+            }}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
@@ -85,6 +88,6 @@ const styles = StyleSheet.create({
 
   button: {
     alignItems: "center", // Center child horizontally (the Button)
-    marginVertical: 12
+    marginVertical: 12,
   }
 });

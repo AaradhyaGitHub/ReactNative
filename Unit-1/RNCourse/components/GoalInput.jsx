@@ -7,6 +7,8 @@ import {
   Modal,
   Image
 } from "react-native";
+import { StatusBar } from "expo-status-bar";
+
 import { useState } from "react";
 import React from "react";
 
@@ -23,38 +25,45 @@ export default function GoalInput(props) {
   }
 
   return (
-    <Modal visible={props.visible} animationType="slide">
-      <View style={styles.inputContainer}>
-        <Image
-          style={styles.image}
-          source={require("../assets/images/CheckList.webp")}
-        />
-        <TextInput
-          style={styles.textInput}
-          placeholder="Enter your goals!"
-          onChangeText={goalInputHandler}
-          value={enteredGoalText}
-        />
-        {enteredGoalText === "" ? (
-          <Text style={{ paddingTop: 16, color: "#029335", fontSize: 20 }}>
-            Please enter your goals
-          </Text>
-        ) : (
-          <View style={styles.buttonContainer}>
-            <View style={styles.button}>
-              <Button title="Cancel" onPress={props.onCancel} color="#e5326a" />
+    <>
+      <StatusBar style="dark" />
+      <Modal visible={props.visible} animationType="slide">
+        <View style={styles.inputContainer}>
+          <Image
+            style={styles.image}
+            source={require("../assets/images/CheckList.webp")}
+          />
+          <TextInput
+            style={styles.textInput}
+            placeholder="Enter your goals!"
+            onChangeText={goalInputHandler}
+            value={enteredGoalText}
+          />
+          {enteredGoalText === "" ? (
+            <Text style={{ paddingTop: 16, color: "#029335", fontSize: 20 }}>
+              Please enter your goals
+            </Text>
+          ) : (
+            <View style={styles.buttonContainer}>
+              <View style={styles.button}>
+                <Button
+                  title="Cancel"
+                  onPress={props.onCancel}
+                  color="#e5326a"
+                />
+              </View>
+              <View style={styles.button}>
+                <Button
+                  title="Add Goal"
+                  onPress={addGoalHandler}
+                  color="#0cbc4a"
+                />
+              </View>
             </View>
-            <View style={styles.button}>
-              <Button
-                title="Add Goal"
-                onPress={addGoalHandler}
-                color="#0cbc4a"
-              />
-            </View>
-          </View>
-        )}
-      </View>
-    </Modal>
+          )}
+        </View>
+      </Modal>
+    </>
   );
 }
 const styles = StyleSheet.create({
