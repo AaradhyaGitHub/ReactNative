@@ -11,11 +11,19 @@ export default function App() {
   const [modalIsVisible, setModalIsVisible] = useState(false);
   const [listofGoals, setListofGoals] = useState([]);
 
+  function startAddGoalHandler() {
+    setModalIsVisible(true);
+  }
+  function endAddGoalHandler() {
+    setModalIsVisible(false);
+  }
+
   function addGoalHandler(enteredGoalText) {
     setListofGoals((currentListofGoals) => [
       ...currentListofGoals,
       { text: enteredGoalText, id: Math.random().toString() }
     ]);
+    endAddGoalHandler();
   }
   function deleteGoalHandler(id) {
     setListofGoals((currentListofGoals) => {
@@ -27,12 +35,20 @@ export default function App() {
   }
   return (
     <View style={styles.appContainer}>
-      <Button
-        title="Add New Goal"
-        color={"#0cbc4935"}
-        onPress={startAddGoalHandler}
-      />
-      {<GoalInput visible={modalIsVisible} onAddGoal={addGoalHandler} />}
+      <View style={styles.button}>
+        <Button
+          title="➕  Add Goal"
+          color={"#0cbc67"}
+          onPress={startAddGoalHandler}
+        />
+      </View>
+      {
+        <GoalInput
+          visible={modalIsVisible}
+          onAddGoal={addGoalHandler}
+          onCancel={endAddGoalHandler}
+        />
+      }
 
       <View style={styles.goalsContainer}>
         <FlatList
@@ -59,11 +75,16 @@ const styles = StyleSheet.create({
   appContainer: {
     paddingTop: 50,
     paddingHorizontal: 16,
-    backgroundColor: "#0cbc4a18",
+    backgroundColor: "#6cd22823",
     flex: 1
   },
 
   goalsContainer: {
     flex: 5
+  },
+
+  button: {
+    alignItems: "center", // Center child horizontally (the Button)
+    marginVertical: 12
   }
 });
