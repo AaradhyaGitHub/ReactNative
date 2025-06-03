@@ -1,8 +1,19 @@
 import { TextInput, Text, View, StyleSheet, Pressable } from "react-native";
+import { useState } from "react";
 import React from "react";
 import PrimaryButton from "../components/PrimaryButton";
 
 export default function StartGameScreen() {
+  const [enteredNumber, setEnteredNumber] = useState("");
+
+  function numberInputHandler(enteredText) {
+    setEnteredNumber(enteredText);
+  }
+
+  function confirmInputHandler(){
+
+  }
+
   return (
     <>
       <View style={styles.inputContainer}>
@@ -12,11 +23,11 @@ export default function StartGameScreen() {
           keyboardType="number-pad"
           autoCapitalize="none"
           autoCorrect={false}
+          value={enteredNumber}
         />
         <View style={styles.buttonContainer}>
-          <PrimaryButton>↻</PrimaryButton>
-          <PrimaryButton>✓</PrimaryButton>
-
+          <PrimaryButton onPress={confirmInputHandler}>↻</PrimaryButton>
+          <PrimaryButton onPress={confirmInputHandler}>✓</PrimaryButton>
         </View>
       </View>
     </>
@@ -25,7 +36,7 @@ export default function StartGameScreen() {
 
 const styles = StyleSheet.create({
   inputContainer: {
-    padding: 16,
+    padding: 8,
     marginTop: "20%",
     alignItems: "center",
     marginHorizontal: 24,
@@ -48,15 +59,16 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     borderColor: "#f4dc7b",
     backgroundColor: "#f4dc7b2d",
-    color: "#fde950d5",
     marginVertical: 1,
     fontWeight: "bold",
-    textAlign: "center"
+    textAlign: "center",
+    color: "black",
+    marginTop: 20
   },
   buttonContainer: {
-    flexDirection: 'row',
-    alignItems:'center',
+    flexDirection: "row",
+    alignItems: "center",
     padding: 20,
-    gap:20
+    gap: 20
   }
 });
