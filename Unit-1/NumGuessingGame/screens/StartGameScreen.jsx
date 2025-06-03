@@ -9,6 +9,7 @@ import {
 import { useState } from "react";
 import React from "react";
 import PrimaryButton from "../components/PrimaryButton";
+import Colors from "../constants/colors";
 
 export default function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
@@ -61,7 +62,7 @@ const styles = StyleSheet.create({
     marginTop: "20%",
     alignItems: "center",
     marginHorizontal: 24,
-    backgroundColor: "#f48b7b",
+    backgroundColor: Colors.primaryBg,
     borderRadius: 8,
     //shadow for android
     elevation: 4,
@@ -78,12 +79,12 @@ const styles = StyleSheet.create({
     fontSize: 32,
     borderWidth: 2,
     borderRadius: 8,
-    borderColor: "#f4dc7b",
+    borderColor: Colors.primary1,
     backgroundColor: "#f4dc7b2d",
     marginVertical: 1,
     fontWeight: "bold",
     textAlign: "center",
-    color: "black",
+    color: Colors.primaryText,
     marginTop: 20
   },
   buttonContainer: {
