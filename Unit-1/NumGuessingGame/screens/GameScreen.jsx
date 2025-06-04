@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Alert } from "react-native";
+import { View, StyleSheet, Alert, FlatList } from "react-native";
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -27,6 +27,7 @@ let maxBoundary = 100;
 export default function GameScreen({ userNumber, onGameOver }) {
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
+  const [guessRounds, setGuessRounds] = useState([initialGuess]);
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -66,6 +67,7 @@ export default function GameScreen({ userNumber, onGameOver }) {
     );
 
     setCurrentGuess(newRandNumber);
+    setGuessRounds((prevGuessRound) => [newRandNumber, ...prevGuessRound]);
   }
 
   return (
@@ -90,6 +92,11 @@ export default function GameScreen({ userNumber, onGameOver }) {
         </View>
         {/* <View>Rounds</View> */}
       </Card>
+      <View>
+        <FlatList>
+          
+        </FlatList>
+      </View>
     </View>
   );
 }
