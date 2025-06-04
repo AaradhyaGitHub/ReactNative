@@ -2,6 +2,9 @@
 import React from "react";
 import { StyleSheet, Text, View, Image } from "react-native";
 import Title from "../components/ui/Title";
+import Colors from "../constants/colors";
+import PrimaryButton from "../components/ui/PrimaryButton";
+import { Ionicons } from "@expo/vector-icons";
 export default function GameOverScreen() {
   return (
     <View style={styles.rootContainer}>
@@ -12,7 +15,11 @@ export default function GameOverScreen() {
           source={require("../assets/images/success.png")}
         />
       </View>
-      <Text>Your Phone needed X rounds to guess the number Y</Text>
+      <Text style={styles.summaryText}>
+        Your Phone needed <Text style={styles.hgihlight}>X</Text> rounds to
+        guess the number <Text style={styles.hgihlight}>Y</Text>
+      </Text>
+      <PrimaryButton>Restart Game</PrimaryButton>
     </View>
   );
 }
@@ -21,7 +28,8 @@ const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
     alignItems: "center",
-    marginTop: 100
+    marginTop: 75,
+    gap: 10
   },
   imageContainer: {
     width: 300,
@@ -35,5 +43,19 @@ const styles = StyleSheet.create({
   imageStyle: {
     width: "100%",
     height: "100%"
+  },
+  summaryText: {
+    fontFamily: "open-sans",
+    fontSize: 24,
+    textAlign: "center",
+    backgroundColor: Colors.primaryBg,
+    width: "88%",
+    borderRadius: 8,
+    paddingVertical: 8
+  },
+
+  hgihlight: {
+    fontFamily: "open-sans-bold",
+    color: Colors.primary1
   }
 });
