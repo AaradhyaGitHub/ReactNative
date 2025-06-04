@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Alert } from "react-native";
+import { View,  StyleSheet, Alert } from "react-native";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import Title from "../components/ui/Title";

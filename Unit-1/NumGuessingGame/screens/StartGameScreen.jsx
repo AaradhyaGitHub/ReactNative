@@ -1,9 +1,7 @@
 import {
   TextInput,
-  Text,
   View,
   StyleSheet,
-  Pressable,
   Alert
 } from "react-native";
 import { useState } from "react";
