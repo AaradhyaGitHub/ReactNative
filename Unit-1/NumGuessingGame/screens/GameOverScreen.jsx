@@ -5,7 +5,11 @@ import Title from "../components/ui/Title";
 import Colors from "../constants/colors";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { Ionicons } from "@expo/vector-icons";
-export default function GameOverScreen() {
+export default function GameOverScreen({
+  roundsNumnber,
+  userNumber,
+  onRestartGame
+}) {
   return (
     <View style={styles.rootContainer}>
       <Title>Game Over!!</Title>
@@ -16,10 +20,11 @@ export default function GameOverScreen() {
         />
       </View>
       <Text style={styles.summaryText}>
-        Your Phone needed <Text style={styles.hgihlight}>X</Text> rounds to
-        guess the number <Text style={styles.hgihlight}>Y</Text>
+        Your Phone needed <Text style={styles.hgihlight}>{roundsNumnber}</Text>{" "}
+        rounds to guess the number{" "}
+        <Text style={styles.hgihlight}>{userNumber}</Text>
       </Text>
-      <PrimaryButton>Restart Game</PrimaryButton>
+      <PrimaryButton onPress={onRestartGame}>Restart Game</PrimaryButton>
     </View>
   );
 }

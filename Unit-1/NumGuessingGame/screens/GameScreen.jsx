@@ -34,6 +34,11 @@ export default function GameScreen({ userNumber, onGameOver }) {
     }
   }, [currentGuess, userNumber, onGameOver]);
 
+  useEffect(() => {
+    minBoundary = 1;
+    maxBoundary = 100;
+  }, []);
+
   function nextGuessHandler(direction) {
     // 'higher' or 'lower'
     if (
@@ -76,11 +81,10 @@ export default function GameScreen({ userNumber, onGameOver }) {
           </InstructionText>
           <ButtonsContainer>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
-              <Ionicons name="arrow-down-sharp" size={24}/>
+              <Ionicons name="arrow-down-sharp" size={24} />
             </PrimaryButton>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
-            <Ionicons name="arrow-up-sharp" size={24}/>
-              
+              <Ionicons name="arrow-up-sharp" size={24} />
             </PrimaryButton>
           </ButtonsContainer>
         </View>
@@ -97,7 +101,6 @@ const styles = StyleSheet.create({
     marginTop: 60
   },
   instructionText: {
-    color: Colors.primaryText,
-    
+    color: Colors.primaryText
   }
 });
