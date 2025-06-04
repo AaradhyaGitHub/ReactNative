@@ -20,11 +20,12 @@ const styles = StyleSheet.create({
     margin: 24,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#f4dc7b5c",
+    backgroundColor: "#f4dc7b5c"
   },
   numberText: {
     color: Colors.primaryText,
     fontSize: 36,
-    fontWeight: "bold"
+    // fontWeight: "bold"
+    fontFamily: "open-sans-bold"
   }
 });

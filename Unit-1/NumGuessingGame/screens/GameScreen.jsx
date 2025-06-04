@@ -97,6 +97,7 @@ const styles = StyleSheet.create({
     marginTop: 60
   },
   instructionText: {
-    color: Colors.primaryText
+    color: Colors.primaryText,
+    
   }
 });

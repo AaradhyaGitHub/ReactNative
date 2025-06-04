@@ -7,12 +7,12 @@ export default function Title({ children }) {
 
 const styles = StyleSheet.create({
   title: {
+    fontFamily: "open-sans-bold",
     fontSize: 24,
-    fontWeight: "bold",
     backgroundColor: Colors.primaryBg,
     color: Colors.primaryText,
     textAlign: "center",
     borderRadius: 8,
-    padding: 12,
+    padding: 12
   }
 });
