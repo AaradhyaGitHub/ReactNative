@@ -1,9 +1,4 @@
-import {
-  TextInput,
-  View,
-  StyleSheet,
-  Alert
-} from "react-native";
+import { TextInput, View, StyleSheet, Alert } from "react-native";
 import { useState } from "react";
 import React from "react";
 import PrimaryButton from "../components/ui/PrimaryButton";
@@ -11,6 +6,7 @@ import Colors from "../constants/colors";
 import Title from "../components/ui/Title";
 import Card from "../components/ui/Card";
 import InstructionText from "../components/ui/InstructionText";
+import ButtonsContainer from "../components/ui/ButtonsContainer";
 
 export default function StartGameScreen({ onPickNumber }) {
   const [enteredNumber, setEnteredNumber] = useState("");
@@ -51,10 +47,10 @@ export default function StartGameScreen({ onPickNumber }) {
           onChangeText={numberInputHandler}
           value={enteredNumber}
         />
-        <View style={styles.buttonContainer}>
+        <ButtonsContainer>
           <PrimaryButton onPress={resetInputHandler}>↻</PrimaryButton>
           <PrimaryButton onPress={confirmInputHandler}>✓</PrimaryButton>
-        </View>
+        </ButtonsContainer>
       </Card>
     </View>
   );
@@ -66,8 +62,6 @@ const styles = StyleSheet.create({
     marginTop: 100,
     alignItems: "center"
   },
-
-  
 
   numInput: {
     height: 62,
@@ -82,11 +76,5 @@ const styles = StyleSheet.create({
     textAlign: "center",
     color: Colors.primaryText,
     marginTop: 20
-  },
-  buttonContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 20,
-    gap: 20
   }
 });

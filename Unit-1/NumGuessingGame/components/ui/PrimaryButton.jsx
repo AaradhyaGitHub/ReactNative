@@ -26,21 +26,31 @@ export default function PrimaryButton({ children, onPress }) {
 
 const styles = StyleSheet.create({
   outerButtonContainer: {
-    borderRadius: 59,
-    overflow: "hidden"
+    borderRadius: 50,
+    overflow: "hidden",
+    margin: 8,
+    shadowColor: "#000", // Soft shadow for iOS
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    elevation: 5, // Shadow for Android
+    backgroundColor: Colors.primary1,
   },
   innerbuttonContainer: {
-    paddingVertical: 2,
-    paddingHorizontal: 9,
-    backgroundColor: Colors.primary1,
-    elevation: 4
+    paddingVertical: 14,
+    paddingHorizontal: 28,
+    alignItems: "center",
+    justifyContent: "center",
   },
   buttonText: {
-    fontSize: 32,
+    fontSize: 18,
+    fontWeight: "600",
     color: Colors.primaryText,
-    textAlign: "center"
+    letterSpacing: 0.5,
   },
   pressed: {
-    opacity: 0.5
-  }
+    opacity: 0.7,
+    transform: [{ scale: 0.97 }],
+  },
 });
+
