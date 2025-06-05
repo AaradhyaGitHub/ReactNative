@@ -16,7 +16,7 @@ export default function GameOverScreen({
       <View style={styles.imageContainer}>
         <Image
           style={styles.imageStyle}
-          source={require("../assets/images/success.png")}
+          source={require("../assets/images/trophy.png")}
         />
       </View>
       <Text style={styles.summaryText}>

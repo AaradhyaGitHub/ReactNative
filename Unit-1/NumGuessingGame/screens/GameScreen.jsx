@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Alert, FlatList } from "react-native";
+import { View, StyleSheet, Alert, FlatList, Text } from "react-native";
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -11,6 +11,7 @@ import InstructionText from "../components/ui/InstructionText";
 import ButtonsContainer from "../components/ui/ButtonsContainer";
 
 import Colors from "../constants/colors";
+import GuessLogItem from "../components/game/GuessLogItem";
 
 function generateRandomBetween(min, max, exclude) {
   const rndNum = Math.floor(Math.random() * (max - min)) + min;
@@ -70,6 +71,8 @@ export default function GameScreen({ userNumber, onGameOver }) {
     setGuessRounds((prevGuessRound) => [newRandNumber, ...prevGuessRound]);
   }
 
+  const guessRoundsListLength = guessRounds.length;
+
   return (
     <View style={styles.screen}>
       <Title>Phone's Guess</Title>
@@ -81,6 +84,7 @@ export default function GameScreen({ userNumber, onGameOver }) {
           <InstructionText style={styles.instructionText}>
             Higher or Lower?
           </InstructionText>
+
           <ButtonsContainer>
             <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
               <Ionicons name="arrow-down-sharp" size={24} />
@@ -92,10 +96,19 @@ export default function GameScreen({ userNumber, onGameOver }) {
         </View>
         {/* <View>Rounds</View> */}
       </Card>
-      <View>
-        <FlatList>
-          
-        </FlatList>
+
+      <View style={styles.guessLogContainer}>
+        <FlatList
+          showsVerticalScrollIndicator={false}
+          data={guessRounds}
+          renderItem={(itemData) => (
+            <GuessLogItem
+              roundNumber={guessRoundsListLength - itemData.index}
+              guess={itemData.item}
+            />
+          )}
+          keyExtractor={(item) => item}
+        />
       </View>
     </View>
   );
@@ -104,10 +117,15 @@ export default function GameScreen({ userNumber, onGameOver }) {
 const styles = StyleSheet.create({
   screen: {
     flex: 1,
-    padding: 24,
-    marginTop: 60
+    padding: 16,
+    marginTop: 50
   },
   instructionText: {
     color: Colors.primaryText
+  },
+  guessLogContainer: {
+    flex: 1,
+    marginTop: 8,
+    padding: 16
   }
 });

@@ -10,6 +10,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: 'center',
     padding: 20,
-    gap: 20
+    gap: 20,
+    paddingBottom: 40
   }
 });
