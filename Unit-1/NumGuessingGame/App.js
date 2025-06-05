@@ -3,6 +3,7 @@ import React from "react";
 import { useState } from "react";
 
 import { StyleSheet, ImageBackground, SafeAreaView } from "react-native";
+import { StatusBar } from "expo-status-bar";
 import { LinearGradient } from "expo-linear-gradient";
 import { useFonts } from "expo-font";
 import * as SplashScreen from "expo-splash-screen";
@@ -61,20 +62,24 @@ export default function App() {
   }
 
   return (
-    <LinearGradient
-      colors={[Colors.primaryBg, Colors.primaryText]}
-      style={styles.rootScreen}
-    >
-      <ImageBackground
-        // @ts-ignore
-        source={require("./assets/images/NG-background.jpg")}
-        resizeMode="cover"
+    <>
+      <StatusBar style="light" />
+
+      <LinearGradient
+        colors={[Colors.primaryBg, Colors.primaryText]}
         style={styles.rootScreen}
-        imageStyle={styles.backgroundImage}
       >
-        <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
-      </ImageBackground>
-    </LinearGradient>
+        <ImageBackground
+          // @ts-ignore
+          source={require("./assets/images/NG-background.jpg")}
+          resizeMode="cover"
+          style={styles.rootScreen}
+          imageStyle={styles.backgroundImage}
+        >
+          <SafeAreaView style={styles.rootScreen}>{screen}</SafeAreaView>
+        </ImageBackground>
+      </LinearGradient>
+    </>
   );
 }
 
