@@ -1,5 +1,11 @@
 import React, { useEffect } from "react";
-import { View, StyleSheet, Alert, FlatList, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Alert,
+  FlatList,
+  useWindowDimensions
+} from "react-native";
 import { useState } from "react";
 import { Ionicons } from "@expo/vector-icons";
 
@@ -29,6 +35,7 @@ export default function GameScreen({ userNumber, onGameOver }) {
   const initialGuess = generateRandomBetween(1, 100, userNumber);
   const [currentGuess, setCurrentGuess] = useState(initialGuess);
   const [guessRounds, setGuessRounds] = useState([initialGuess]);
+  const { width, height } = useWindowDimensions();
 
   useEffect(() => {
     if (currentGuess === userNumber) {
@@ -73,13 +80,10 @@ export default function GameScreen({ userNumber, onGameOver }) {
 
   const guessRoundsListLength = guessRounds.length;
 
-  return (
-    <View style={styles.screen}>
-      <Title>Phone's Guess</Title>
-
+  let defaultLayout = (
+    <>
       <NumberContainer>{currentGuess}</NumberContainer>
-      
-      
+
       <Card>
         <View>
           <InstructionText style={styles.instructionText}>
@@ -97,6 +101,31 @@ export default function GameScreen({ userNumber, onGameOver }) {
         </View>
         {/* <View>Rounds</View> */}
       </Card>
+    </>
+  );
+
+  if (width > 500) {
+    defaultLayout = (
+      <>
+        <View style={styles.buttonContainerWide}>
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "higher")}>
+            <Ionicons name="arrow-up-sharp" size={24} />
+          </PrimaryButton>
+
+          <NumberContainer>{currentGuess}</NumberContainer>
+
+          <PrimaryButton onPress={nextGuessHandler.bind(this, "lower")}>
+            <Ionicons name="arrow-down-sharp" size={24} />
+          </PrimaryButton>
+        </View>
+      </>
+    );
+  }
+
+  return (
+    <View style={styles.screen}>
+      <Title>Phone's Guess</Title>
+      {defaultLayout}
 
       <View style={styles.guessLogContainer}>
         <FlatList
@@ -120,14 +149,19 @@ const styles = StyleSheet.create({
     flex: 1,
     padding: 16,
     marginTop: 50,
-    alignItems: 'center'
+    alignItems: "center"
   },
   instructionText: {
     color: Colors.primaryText
   },
+  buttonContainerWide:{
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
   guessLogContainer: {
+    width: '80%',
     flex: 1,
-    marginTop: 8,
-    padding: 16
+    marginTop: 2,
+    padding: 8
   }
 });
