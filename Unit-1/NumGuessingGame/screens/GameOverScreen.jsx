@@ -1,10 +1,13 @@
 // @ts-nocheck
 import React from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, Dimensions } from "react-native";
 import Title from "../components/ui/Title";
 import Colors from "../constants/colors";
 import PrimaryButton from "../components/ui/PrimaryButton";
 import { Ionicons } from "@expo/vector-icons";
+
+const deviceWidth = Dimensions.get("window").width;
+
 export default function GameOverScreen({
   roundsNumnber,
   userNumber,
@@ -37,10 +40,11 @@ const styles = StyleSheet.create({
     gap: 10
   },
   imageContainer: {
-    width: 300,
-    height: 300,
+    width: deviceWidth < 380 ? 150: 300,
+    height: deviceWidth < 380 ? 150: 300,
+
     borderRadius: 150,
-    borderWidth: 3,
+    borderWidth: 0.2,
     borderColor: "white",
     overflow: "hidden",
     margin: 36

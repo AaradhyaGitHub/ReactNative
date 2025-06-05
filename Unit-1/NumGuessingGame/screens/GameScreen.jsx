@@ -78,7 +78,8 @@ export default function GameScreen({ userNumber, onGameOver }) {
       <Title>Phone's Guess</Title>
 
       <NumberContainer>{currentGuess}</NumberContainer>
-      {/* GUESS */}
+      
+      
       <Card>
         <View>
           <InstructionText style={styles.instructionText}>
