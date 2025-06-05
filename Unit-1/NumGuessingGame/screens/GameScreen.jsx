@@ -159,7 +159,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   guessLogContainer: {
-    width: '80%',
+    width: '100%',
     flex: 1,
     marginTop: 2,
     padding: 8
