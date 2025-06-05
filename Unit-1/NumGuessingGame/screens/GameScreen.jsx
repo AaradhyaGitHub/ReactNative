@@ -118,7 +118,8 @@ const styles = StyleSheet.create({
   screen: {
     flex: 1,
     padding: 16,
-    marginTop: 50
+    marginTop: 50,
+    alignItems: 'center'
   },
   instructionText: {
     color: Colors.primaryText

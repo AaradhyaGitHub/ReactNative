@@ -13,6 +13,8 @@ const styles = StyleSheet.create({
     color: Colors.primaryText,
     textAlign: "center",
     borderRadius: 8,
-    padding: 12
+    padding: 12,
+    maxWidth: "80%",
+    width: 300
   }
 });
