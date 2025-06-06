@@ -6,7 +6,7 @@ import { StyleSheet, Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-
+import { Ionicons } from "@expo/vector-icons";
 //Custom Compoents
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CarsOverviewScreen from "./screens/CarsOverviewScreen";
@@ -25,15 +25,54 @@ function DrawerNavigator() {
         screenOptions={{
           headerStyle: { backgroundColor: "#295251" },
           sceneStyle: { backgroundColor: "#c1c1c1ef" },
-          headerTintColor: "#ffffff"
+          headerTintColor: "#ffffff",
+          //drawer container design config
+          drawerContentStyle: { backgroundColor: "#135a59" },
+          drawerStyle: {
+            backgroundColor: "#fff",
+            width: "70%", // ← Adjust this value to make the drawer narrower
+            marginTop: 92,
+            height: "80%",
+            borderTopRightRadius: 0,
+            borderBottomRightRadius: 30,
+            overflow: "hidden"
+          },
+          //drawer text config
+          drawerInactiveTintColor: "#ffffff",
+          drawerActiveTintColor: "#ffffff",
+          //drawer text container config
+          drawerActiveBackgroundColor: "rgba(255, 255, 255, 0.19)",
+          drawerItemStyle: { borderRadius: 20, width: "100%" }
         }}
       >
         <Drawer.Screen
           name="Categories"
           component={CategoriesScreen}
-          options={{ title: "Available Car Categories" }}
+          options={{
+            title: "Available Car Categories",
+            drawerIcon: ({ color, size }) => {
+              return (
+                <>
+                  <Ionicons name="car" color={color} size={size} />
+                </>
+              );
+            }
+          }}
         />
-        <Drawer.Screen name="Favorites" component={FavoritesScreen} />
+        <Drawer.Screen
+          name="Favorites"
+          component={FavoritesScreen}
+          options={{
+            title: "Favorites",
+            drawerIcon: ({ color, size }) => {
+              return (
+                <>
+                  <Ionicons name="star" color="#fef72d" size={size} />
+                </>
+              );
+            }
+          }}
+        />
       </Drawer.Navigator>
     </>
   );
