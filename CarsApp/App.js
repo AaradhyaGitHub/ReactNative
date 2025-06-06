@@ -19,10 +19,9 @@ export default function App() {
     <>
       <StatusBar style="dark" />
       <NavigationContainer>
-        <Stack.Navigator>
+        <Stack.Navigator initialRouteName="Categories">
           <Stack.Screen name="Categories" component={CategoriesScreen} />
           <Stack.Screen name="CarsOverview" component={CarsOverviewScreen} />
-
         </Stack.Navigator>
       </NavigationContainer>
     </>

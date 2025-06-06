@@ -2,10 +2,11 @@ import React from "react";
 import { View, Text, StyleSheet } from "react-native";
 import { CARS } from "../data/dummy-data";
 
-export default function CarsOverviewScreen() {
+export default function CarsOverviewScreen({ route }) {
+  const catId = route.params.categoryId;
   return (
     <View style={styles.container}>
-      <Text>Carrs OverView Screen</Text>
+      <Text>Carrs OverView Screen - {catId}</Text>
     </View>
   );
 }
