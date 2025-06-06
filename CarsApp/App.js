@@ -8,6 +8,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 
 //Custom Compoents
 import CategoriesScreen from "./screens/CategoriesScreen";
+import CarsOverviewScreen from "./screens/CarsOverviewScreen";
 
 // ------------------------[END IMPORTS]------------------------ //
 
@@ -20,6 +21,8 @@ export default function App() {
       <NavigationContainer>
         <Stack.Navigator>
           <Stack.Screen name="Categories" component={CategoriesScreen} />
+          <Stack.Screen name="CarsOverview" component={CarsOverviewScreen} />
+
         </Stack.Navigator>
       </NavigationContainer>
     </>
