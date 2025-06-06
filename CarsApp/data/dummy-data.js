@@ -21,7 +21,7 @@ export const CARS = [
     "Tesla Model 3",
     "expensive",
     "advanced",
-    "https://cdn.pixabay.com/photo/2021/01/15/16/49/tesla-5919764_1280.jpg",
+    "https://hips.hearstapps.com/hmg-prod/images/2024-tesla-model-3-long-range-rwd-132-66feb663ecf17.jpg?crop=0.704xw:0.594xh;0.143xw,0.392xh&resize=2048:*",
     2018,
     [
       "Electric Motor: Dual motor AWD",
@@ -52,7 +52,7 @@ export const CARS = [
     "Toyota Prius",
     "affordable",
     "simple",
-    "https://cdn.pixabay.com/photo/2016/11/19/11/26/automobile-1840233_1280.jpg",
+    "https://rpmweb.ca/medias/Toyota-Prius-2025-1.jpg",
     1997,
     [
       "Engine: 1.8L 4-cylinder with electric motor",
@@ -83,7 +83,7 @@ export const CARS = [
     "Ford Explorer",
     "moderate",
     "simple",
-    "https://cdn.pixabay.com/photo/2020/05/24/17/22/ford-5214834_1280.jpg",
+    "https://pictures.dealer.com/s/stevemarshfordfd/1234/8994c7996b6d481cb5d9e3a6685ae692.jpg",
     1990,
     [
       "Engine: 2.3L EcoBoost Turbo 4-cylinder",
@@ -114,7 +114,7 @@ export const CARS = [
     "Porsche 911",
     "luxurious",
     "challenging",
-    "https://cdn.pixabay.com/photo/2020/09/06/07/37/car-5548242_1280.jpg",
+    "https://newsroom.porsche.com/.imaging/mte/porsche-templating-theme/image_1290x726/dam/pnr/2024/Products/992-II/0840_nevada_coupe_u-crane_AKOS0607_edit_V03-sky.jpg/jcr:content/0840_nevada_coupe_u-crane_AKOS0607_edit_V03-sky.jpg",
     1963,
     [
       "Engine: 3.0L twin-turbo flat-6",
@@ -145,7 +145,7 @@ export const CARS = [
     "Mercedes-Benz S-Class",
     "luxurious",
     "advanced",
-    "https://cdn.pixabay.com/photo/2018/04/18/16/16/mercedes-benz-3331190_1280.jpg",
+    "https://static1.hotcarsimages.com/wordpress/wp-content/uploads/2022/07/2022-Mercedes-Benz-S-Class.jpeg",
     1972,
     [
       "Engine: 3.0L inline-6 turbo with mild hybrid",
@@ -176,7 +176,7 @@ export const CARS = [
     "1967 Ford Mustang",
     "collectible",
     "classic",
-    "https://cdn.pixabay.com/photo/2016/04/01/12/16/car-1300629_1280.jpg",
+    "https://cdn.dealeraccelerate.com/noreserve/1/588/11955/1920x1440/1967-ford-mustang",
     1967,
     [
       "Engine: 289 or 390 cubic inch V8",
@@ -207,7 +207,7 @@ export const CARS = [
     "Honda Accord",
     "affordable",
     "simple",
-    "https://cdn.pixabay.com/photo/2017/07/18/10/54/honda-2515433_1280.jpg",
+    "https://alcf.s3.us-west-1.amazonaws.com/_custom/2025/honda/accord/2025_honda_accord_sedan_touring-hybrid_fq_oem_1_1600x1067.jpg",
     1976,
     [
       "Engine: 1.5L turbo 4-cylinder or 2.0L turbo",
@@ -238,7 +238,7 @@ export const CARS = [
     "Ford F-150",
     "moderate",
     "rugged",
-    "https://cdn.pixabay.com/photo/2016/04/01/12/04/car-1300270_1280.jpg",
+    "https://images.jazelc.com/uploads/futurefordofsacramento-m2en/2025-Ford-F-150-Raptor-R-Dust.jpg",
     1975,
     [
       "Engine: 3.3L V6 to 5.0L V8, plus hybrid options",
@@ -269,7 +269,7 @@ export const CARS = [
     "Toyota RAV4",
     "moderate",
     "simple",
-    "https://cdn.pixabay.com/photo/2020/05/11/19/44/rav4-5160051_1280.jpg",
+    "https://i.gaw.to/vehicles/photos/40/36/403618-2024-toyota-rav4.jpg?1024x640",
     1994,
     [
       "Engine: 2.5L 4-cylinder with AWD standard",
@@ -300,7 +300,7 @@ export const CARS = [
     "BMW Z4",
     "expensive",
     "sporty",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://www.thedrive.com/wp-content/uploads/2024/09/2025-bmw-z4-m40i-2.jpg?quality=85",
     2002,
     [
       "Engine: 2.0L turbo 4-cylinder or 3.0L turbo inline-6",
