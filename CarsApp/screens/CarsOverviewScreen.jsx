@@ -21,7 +21,15 @@ export default function CarsOverviewScreen({ route }) {
   });
 
   function renderCarItem(itemData) {
-    return <CarItem title={itemData.item.title} imageUrl={itemData.item.imageUrl}/>;
+    const item = itemData.item;
+    const mealItemProps = {
+      title: item.title,
+      imageUrl: item.imageUrl,
+      affordability: item.affordability,
+      complexity: item.complexity,
+      year: item.year
+    };
+    return <CarItem {...mealItemProps} />;
   }
 
   return (
@@ -32,7 +40,7 @@ export default function CarsOverviewScreen({ route }) {
         renderItem={renderCarItem}
         // @ts-ignore
         keyExtractor={(item) => {
-          item.id;
+          return item.id;
         }}
       />
     </View>
