@@ -2,16 +2,16 @@ import Category from "../models/category";
 import Car from "../models/car";
 
 export const CATEGORIES = [
-  new Category("c1", "EV", "#00ff88"),
-  new Category("c2", "Hybrid", "#42f554"),
-  new Category("c3", "SUV ", "#f54242"),
-  new Category("c4", "Sports Car", "#ff6b42"),
-  new Category("c5", "Luxury Car", "#ffd700"),
-  new Category("c6", "Collectible", "#8b4513"),
-  new Category("c7", "Sedan", "#368dff"),
-  new Category("c8", "Pickup", "#654321"),
-  new Category("c9", "Crossover", "#9370db"),
-  new Category("c10", "Convertible", "#ff69b4")
+  new Category("c1", "EV", "#4a7c59"),
+  new Category("c2", "Hybrid", "#6b8e23"),
+  new Category("c3", "SUV ", "#8b4513"),
+  new Category("c4", "Sports Car", "#cd853f"),
+  new Category("c5", "Luxury Car", "#b8860b"),
+  new Category("c6", "Collectible", "#708090"),
+  new Category("c7", "Sedan", "#4682b4"),
+  new Category("c8", "Pickup", "#556b2f"),
+  new Category("c9", "Crossover", "#5f9ea0"),
+  new Category("c10", "Convertible", "#9acd32")
 ];
 
 export const CARS = [

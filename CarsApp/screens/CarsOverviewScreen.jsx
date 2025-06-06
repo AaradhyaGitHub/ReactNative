@@ -35,6 +35,7 @@ export default function CarsOverviewScreen({ route }) {
   return (
     <View style={styles.container}>
       <FlatList
+        showsVerticalScrollIndicator={false}
         data={displayedCars}
         // @ts-ignore
         renderItem={renderCarItem}

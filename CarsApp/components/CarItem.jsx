@@ -1,5 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet, Pressable, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Pressable,
+  Image,
+  Platform
+} from "react-native";
 
 export default function CarItem({
   title,
@@ -10,15 +17,21 @@ export default function CarItem({
 }) {
   return (
     <View style={styles.carItem}>
-      <Pressable>
-        <View>
-          <Image source={{ uri: imageUrl }} style={styles.image} />
-          <Text style={styles.title}>{title}</Text>
-        </View>
-        <View style={styles.details}>
-          <Text style={styles.detailItem}>{year}</Text>
-          <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
-          <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
+      <Pressable
+        android_ripple={{ color: "#00000054" }}
+        style={({ pressed }) => [pressed ? styles.buttonPressed : null]}
+        
+      >
+        <View style={styles.innerContainer}>
+          <View>
+            <Image source={{ uri: imageUrl }} style={styles.image} />
+            <Text style={styles.title}>{title}</Text>
+          </View>
+          <View style={styles.details}>
+            <Text style={styles.detailItem}>{year}</Text>
+            <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
+            <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
+          </View>
         </View>
       </Pressable>
     </View>
@@ -29,8 +42,22 @@ const styles = StyleSheet.create({
   carItem: {
     margin: 12,
     borderRadius: 12,
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
+    elevation: 4,
+    //ios shadow
+    shadowColor: "black",
+    backgroundColor: "#dbdbdb",
+    shadowOpacity: 0.25,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8
+  },
+  buttonPressed: {
+    opacity: 0.80
+  },
+  innerContainer: {
+    borderRadius: 12,
     overflow: "hidden",
-    backgroundColor: "#d1d1d18b"
+    backgroundColor: "#dbdbdb"
   },
   image: {
     width: "100%",
@@ -39,9 +66,9 @@ const styles = StyleSheet.create({
   title: {
     fontWeight: "bold",
     textAlign: "center",
-    fontSize: 18,
-    margin: 8,
-    color: "#295251",
+    fontSize: 24,
+    margin: 6,
+    color: "#295251"
   },
   details: {
     flexDirection: "row",
@@ -50,11 +77,12 @@ const styles = StyleSheet.create({
     justifyContent: "center"
   },
   detailItem: {
-    marginHorizontal: 8,
+    marginHorizontal: 4,
+    marginBottom: 10,
     backgroundColor: "#295251",
-    fontSize: 15,
-    borderRadius: 12,
+    fontSize: 16,
+    borderRadius: 18,
     color: "white",
-    padding: 9
+    padding: 8
   }
 });
