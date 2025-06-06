@@ -37,9 +37,13 @@ export default function App() {
           <Stack.Screen
             name="CarsOverview"
             component={CarsOverviewScreen}
-            options={{
-              title: "Car Categories"
-            }}
+            // options={({ route, navigation }) => {
+            //   // @ts-ignore
+            //   const catId = route.params.categoryId;
+            //   return {
+            //     title: catId
+            //   };
+            // }}
           />
         </Stack.Navigator>
       </NavigationContainer>

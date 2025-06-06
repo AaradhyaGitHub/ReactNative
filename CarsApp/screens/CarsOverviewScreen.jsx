@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
 // @ts-ignore
 import { View, Text, StyleSheet, FlatList } from "react-native";
-import { CARS } from "../data/dummy-data";
+import { CARS, CATEGORIES } from "../data/dummy-data";
 import CarItem from "../components/CarItem";
 
-export default function CarsOverviewScreen({ route }) {
+export default function CarsOverviewScreen({ route, navigation }) {
   {
     /* 
       Alternative to route using a hook: 
@@ -19,6 +19,16 @@ export default function CarsOverviewScreen({ route }) {
   const displayedCars = CARS.filter((carItem) => {
     return carItem.categoryIds.indexOf(catId) >= 0;
   });
+
+  const categoryTitle = CATEGORIES.find(
+    (category) => category.id === catId
+  )?.title;
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      title: categoryTitle
+    });
+  }, [catId, navigation]);
 
   function renderCarItem(itemData) {
     const item = itemData.item;
