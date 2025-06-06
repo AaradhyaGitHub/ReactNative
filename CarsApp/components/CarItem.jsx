@@ -9,6 +9,7 @@ import {
   Platform
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
+import CarDetails from "./CarDetails";
 
 export default function CarItem({
   id,
@@ -36,11 +37,16 @@ export default function CarItem({
             <Image source={{ uri: imageUrl }} style={styles.image} />
             <Text style={styles.title}>{title}</Text>
           </View>
-          <View style={styles.details}>
+          <CarDetails
+            year={year}
+            complexity={complexity}
+            affordability={affordability}
+          />
+          {/* <View style={styles.details}>
             <Text style={styles.detailItem}>{year}</Text>
             <Text style={styles.detailItem}>{complexity.toUpperCase()}</Text>
             <Text style={styles.detailItem}>{affordability.toUpperCase()}</Text>
-          </View>
+          </View> */}
         </View>
       </Pressable>
     </View>
@@ -78,20 +84,20 @@ const styles = StyleSheet.create({
     fontSize: 24,
     margin: 6,
     color: "#295251"
-  },
-  details: {
-    flexDirection: "row",
-    alignItems: "center",
-    padding: 8,
-    justifyContent: "center"
-  },
-  detailItem: {
-    marginHorizontal: 4,
-    marginBottom: 10,
-    backgroundColor: "#295251",
-    fontSize: 16,
-    borderRadius: 18,
-    color: "white",
-    padding: 8
   }
+  //   details: {
+  //     flexDirection: "row",
+  //     alignItems: "center",
+  //     padding: 8,
+  //     justifyContent: "center"
+  //   },
+  //   detailItem: {
+  //     marginHorizontal: 4,
+  //     marginBottom: 10,
+  //     backgroundColor: "#295251",
+  //     fontSize: 16,
+  //     borderRadius: 18,
+  //     color: "white",
+  //     padding: 8
+  //   }
 });
