@@ -1,7 +1,6 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createDrawerNavigator } from "@react-navigation/drawer";
-import FlexBoxPracticeScreen from "./screens/FlexBoxPracticeScreen";
 import WelcomeScreen from "./screens/WelcomeScreen";
 import UserScreen from "./screens/UserScreen";
 import { Ionicons } from "@expo/vector-icons";
@@ -45,18 +44,7 @@ export default function App() {
             )
           }}
         />
-        <Drawer.Screen
-          name="FlexBoxPractice"
-          component={FlexBoxPracticeScreen}
-          options={{
-            drawerLabel: "Flex Practice Screen",
-            drawerIcon: ({ color, size }) => (
-              <>
-                <Ionicons color={color} name="book" size={size} />
-              </>
-            )
-          }}
-        />
+        
       </Drawer.Navigator>
     </NavigationContainer>
   );
