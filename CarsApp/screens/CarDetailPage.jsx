@@ -1,18 +1,12 @@
 // @ts-nocheck
 
 import React, { useLayoutEffect } from "react";
-import {
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  ScrollView,
-  Button
-} from "react-native";
+import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
 import { CARS } from "../data/dummy-data";
 import CarDetails from "../components/CarDetails";
+import IconButton from "../components/IconButton";
 
 export default function CarDetailPage({ route, navigation }) {
   const carId = route.params.carId;
@@ -25,10 +19,16 @@ export default function CarDetailPage({ route, navigation }) {
   useLayoutEffect(() => {
     navigation.setOptions({
       headerRight: () => {
-        return <Button title="More!" onPress={headerButtonPressHandler} />;
+        return (
+          <IconButton
+            onStarPress={headerButtonPressHandler}
+            icon="star" // or the corrected icon name
+            color="#c4c107"
+          />
+        );
       }
     });
-  }, [navigation. headerButtonPressHandler]);
+  }, [navigation, headerButtonPressHandler]); // Fixed this line
 
   return (
     <ScrollView style={styles.container}>
