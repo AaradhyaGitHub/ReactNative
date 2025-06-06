@@ -17,27 +17,6 @@ export const CATEGORIES = [
 {
   /*
 
-2025 Corvette ZR1 - 1,064 hp hypercar beast
-Toyota Corolla 2025 - Reliable compact sedan
-Toyota Camry 2025 - Popular midsize sedan
-Mercedes AMG SLS Black Series 2014 - Collectible supercar
-Porsche 911 GT3 RS - Track-focused sports car
-Toyota Sequoia 2025 - Full-size SUV
-Toyota Tacoma TRD Pro 2025 - Off-road pickup
-Audi RS7 2024 - Performance luxury sedan
-Porsche Taycan Turbo S 2025 - Electric luxury sedan
-Volkswagen Golf GTI 2025 - Hot hatch icon
-Mercedes E63 AMG Wagon - Performance wagon
-Tesla Model X 2024 - Luxury electric SUV
-Tesla Model Y 2024 - Compact electric SUV
-Ford Mustang Mach-E 2025 - Electric SUV
-Mazda MX-5 Miata 2025 - Pure roadster
-LaFerrari 2014 - Ultimate hypercar
-Lamborghini Aventador 2023 - Supercar icon
-Lexus LS 2025 - Flagship luxury sedan
-Lexus GX 2025 - Luxury off-road SUV
-Lexus RX 2025 - Luxury crossover
-Lexus LC 2025 - Grand touring coupe
 
 */
 }
@@ -361,7 +340,7 @@ export const CARS = [
     "2025 Corvette ZR1",
     "luxurious",
     "challenging",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://hips.hearstapps.com/hmg-prod/images/2025-chevrolet-corvette-zr-1-1809-68309389318ba.jpg?crop=0.813xw:0.686xh;0.146xw,0.245xh&resize=980:*",
     2025,
     [
       "Engine: 5.5L twin-turbocharged V8 LT7",
@@ -392,7 +371,7 @@ export const CARS = [
     "Toyota Corolla",
     "affordable",
     "simple",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://imgcdn.zigwheels.us/large/gallery/exterior/9/74/toyota-corolla-front-angle-low-view-714307.jpg",
     2025,
     [
       "Engine: 2.0L Dynamic Force 4-cylinder",
@@ -423,7 +402,7 @@ export const CARS = [
     "Toyota Camry",
     "moderate",
     "simple",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://hips.hearstapps.com/hmg-prod/images/2025-toyota-camry-xse-awd-123-66993cc94cc40.jpg",
     2025,
     [
       "Engine: 2.5L 4-cylinder or 3.5L V6",
@@ -454,7 +433,7 @@ export const CARS = [
     "Mercedes AMG SLS Black Series",
     "luxurious",
     "challenging",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://www.topgear.com/sites/default/files/images/news-article/carousel/2018/08/77f051548250a5fc223feba74518cb8d/2014_mercedes-benz_sls_amg_black_series_0005.jpg",
     2014,
     [
       "Engine: 6.2L naturally aspirated V8 AMG",
@@ -485,7 +464,7 @@ export const CARS = [
     "Porsche 911 GT3 RS",
     "luxurious",
     "challenging",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://m.media-amazon.com/images/I/91IkIzfjcgL.jpg",
     2024,
     [
       "Engine: 4.0L naturally aspirated flat-6",
@@ -516,7 +495,7 @@ export const CARS = [
     "Toyota Sequoia",
     "expensive",
     "rugged",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://ecoloauto.com/wp-content/uploads/2023-Toyota-Sequoia-TRD-Pro-8872-1024x683.jpg",
     2025,
     [
       "Engine: 3.5L twin-turbo V6 hybrid (i-FORCE MAX)",
@@ -547,7 +526,7 @@ export const CARS = [
     "Toyota Tacoma TRD Pro",
     "expensive",
     "rugged",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://cimg3.ibsrv.net/ibimg/hgm/1920x1080-1/100/953/2025-toyota-tacoma_100953203.jpg",
     2025,
     [
       "Engine: 2.4L turbo 4-cylinder with hybrid assist",
@@ -578,7 +557,7 @@ export const CARS = [
     "Audi RS7",
     "luxurious",
     "challenging",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://4kwallpapers.com/images/wallpapers/abt-rs7-legacy-2560x1440-12295.jpg",
     2024,
     [
       "Engine: 4.0L twin-turbo V8 with mild hybrid",
@@ -609,7 +588,7 @@ export const CARS = [
     "Porsche Taycan Turbo S",
     "luxurious",
     "challenging",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://static1.topspeedimages.com/wordpress/wp-content/uploads/2024/03/porsche-taycan.png",
     2025,
     [
       "Motor: Dual electric motors with overboost",
@@ -640,7 +619,7 @@ export const CARS = [
     "Volkswagen Golf GTI",
     "moderate",
     "sporty",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://static0.carbuzzimages.com/wordpress/wp-content/uploads/2024/03/872568-21.jpg",
     2025,
     [
       "Engine: 2.0L turbo 4-cylinder EA888",
@@ -671,7 +650,7 @@ export const CARS = [
     "Mercedes E63 AMG Wagon",
     "luxurious",
     "challenging",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://www.cnet.com/a/img/resize/2e623d10cfed775b12aec66223906a87955b802d/hub/2017/02/02/72ed574e-119d-4227-9158-5c05e65ff7ea/2018-mercedes-amg-e63-s-wagon-9.jpg?auto=webp&width=1200",
     2024,
     [
       "Engine: 4.0L twin-turbo V8 AMG",
@@ -702,7 +681,7 @@ export const CARS = [
     "Tesla Model X",
     "luxurious",
     "advanced",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://static0.carbuzzimages.com/wordpress/wp-content/uploads/2024/09/screenshot-2024-09-26-07-06-21-1.png",
     2024,
     [
       "Motor: Dual or tri-motor electric powertrain",
@@ -733,7 +712,7 @@ export const CARS = [
     "Tesla Model Y",
     "expensive",
     "advanced",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://electrifynews.com/wp-content/uploads/2023/08/2023-tesla-model-y-electrify-news-14_cropped.png",
     2024,
     [
       "Motor: Dual motor all-wheel drive",
@@ -764,7 +743,7 @@ export const CARS = [
     "Ford Mustang Mach-E",
     "expensive",
     "advanced",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://www.cnet.com/a/img/resize/2c7a12b817ae55cff2d041b37122a9346b1dba6b/hub/2019/11/17/71ccee2d-770b-46fe-abba-1b685bccefa4/mach-e-ogi.jpg?auto=webp&fit=crop&height=900&width=1200",
     2025,
     [
       "Motor: Single or dual electric motors",
@@ -795,7 +774,7 @@ export const CARS = [
     "Mazda MX-5 Miata",
     "moderate",
     "sporty",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://di-sitebuilder-assets.dealerinspire.com/Mazda/model-pages/2025/MX-5+RF/Hero/Desktop/Hero.jpg",
     2025,
     [
       "Engine: 2.0L SKYACTIV-G 4-cylinder",
@@ -826,7 +805,7 @@ export const CARS = [
     "LaFerrari",
     "luxurious",
     "challenging",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://www.classicdriver.com/sites/default/files/users/57458/cars_images/57458-1017820-car-20240701_093707-bauer_sk-24.jpg",
     2014,
     [
       "Engine: 6.3L V12 with electric motor hybrid",
@@ -857,7 +836,7 @@ export const CARS = [
     "Lamborghini Aventador",
     "luxurious",
     "challenging",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://www.lamborghini.com/sites/it-en/files/DAM/lamborghini/facelift_2019/model_detail/aventador/Ultimae/2023/02_21/aven_ultimae_s_02.jpg",
     2023,
     [
       "Engine: 6.5L naturally aspirated V12",
@@ -888,7 +867,7 @@ export const CARS = [
     "Lexus LS",
     "luxurious",
     "advanced",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://www.lexus.com.my/content/dam/lexus-v3-malaysia/model/sedan/ls-mc/lexus-ls-mlp-masthead-d-new.jpg",
     2025,
     [
       "Engine: 3.4L twin-turbo V6 hybrid",
@@ -919,7 +898,7 @@ export const CARS = [
     "Lexus GX",
     "luxurious",
     "rugged",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://toyotacanada.scene7.com/is/image/toyotacanada/lexus-2025-gx-550-hero-overtrail-plus-earth-black-roof-x?fit=constrain&wid=1920",
     2025,
     [
       "Engine: 3.4L twin-turbo V6",
@@ -950,7 +929,7 @@ export const CARS = [
     "Lexus RX",
     "expensive",
     "advanced",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://d101065gusk61e.cloudfront.net/wp-content/uploads/2024/11/20104951/2025-Lexus-RX-Walkthrough.jpg",
     2025,
     [
       "Engine: 2.4L turbo 4-cylinder or hybrid variants",
@@ -981,7 +960,7 @@ export const CARS = [
     "Lexus LC",
     "luxurious",
     "sporty",
-    "PLACEHOLDER_IMAGE_URL",
+    "https://tmna.aemassets.toyota.com/is/image/toyota/lexus/images/models/lc/2024/performance/Lexus-LC-MoreDynamicHandling-VideoStill-mobile-750x448-LEX-LC5-MY24-0047.jpg?wid=750&hei=448",
     2025,
     [
       "Engine: 5.0L naturally aspirated V8 or hybrid V6",
