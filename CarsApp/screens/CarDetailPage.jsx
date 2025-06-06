@@ -22,8 +22,8 @@ export default function CarDetailPage({ route, navigation }) {
         return (
           <IconButton
             onStarPress={headerButtonPressHandler}
-            icon="star" // or the corrected icon name
-            color="#c4c107"
+            icon="star-outline" // or the corrected icon name
+            color="#fef72d"
           />
         );
       }

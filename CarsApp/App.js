@@ -21,9 +21,19 @@ const Drawer = createDrawerNavigator();
 function DrawerNavigator() {
   return (
     <>
-      <Drawer.Navigator>
-        <Drawer.Screen name="Categories" component={CategoriesScreen}/>
-        <Drawer.Screen name="Favorites" component={FavoritesScreen}/>
+      <Drawer.Navigator
+        screenOptions={{
+          headerStyle: { backgroundColor: "#295251" },
+          sceneStyle: { backgroundColor: "#c1c1c1ef" },
+          headerTintColor: "#ffffff"
+        }}
+      >
+        <Drawer.Screen
+          name="Categories"
+          component={CategoriesScreen}
+          options={{ title: "Available Car Categories" }}
+        />
+        <Drawer.Screen name="Favorites" component={FavoritesScreen} />
       </Drawer.Navigator>
     </>
   );
@@ -37,7 +47,7 @@ export default function App() {
         <Stack.Navigator
           initialRouteName="Drawer"
           screenOptions={{
-            headerStyle: { backgroundColor: "#29525187" },
+            headerStyle: { backgroundColor: "#295251" },
             contentStyle: { backgroundColor: "#c1c1c1ef" },
             headerTintColor: "#ffffff"
           }}
@@ -46,12 +56,16 @@ export default function App() {
             name="Drawer"
             component={DrawerNavigator} // switched from Catergories component
             options={{
-              title: "All Categories"
+              headerShown: false
             }}
           />
 
           <Stack.Screen name="CarsOverview" component={CarsOverviewScreen} />
-          <Stack.Screen name="CarDetail" component={CarDetailPage} />
+          <Stack.Screen
+            name="CarDetail"
+            component={CarDetailPage}
+            options={{ title: "About the Car" }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
