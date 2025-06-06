@@ -1,15 +1,34 @@
 // @ts-nocheck
 
-import React from "react";
-import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
+import React, { useLayoutEffect } from "react";
+import {
+  Text,
+  View,
+  Image,
+  StyleSheet,
+  ScrollView,
+  Button
+} from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
 import { CARS } from "../data/dummy-data";
 import CarDetails from "../components/CarDetails";
 
-export default function CarDetailPage({ route }) {
+export default function CarDetailPage({ route, navigation }) {
   const carId = route.params.carId;
   const selectedCar = CARS.find((car) => car.id === carId);
+
+  function headerButtonPressHandler() {
+    console.log("Header button clicked");
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return <Button title="More!" onPress={headerButtonPressHandler} />;
+      }
+    });
+  }, [navigation. headerButtonPressHandler]);
 
   return (
     <ScrollView style={styles.container}>
