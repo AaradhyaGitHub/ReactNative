@@ -32,14 +32,15 @@ export default function CarsOverviewScreen({ route, navigation }) {
 
   function renderCarItem(itemData) {
     const item = itemData.item;
-    const mealItemProps = {
+    const carItemProps = {
+      id: item.id,
       title: item.title,
       imageUrl: item.imageUrl,
       affordability: item.affordability,
       complexity: item.complexity,
       year: item.year
     };
-    return <CarItem {...mealItemProps} />;
+    return <CarItem {...carItemProps} />;
   }
 
   return (

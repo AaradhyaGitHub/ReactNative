@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React from "react";
 import {
   View,
@@ -7,20 +8,28 @@ import {
   Image,
   Platform
 } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function CarItem({
+  id,
   title,
   imageUrl,
   year,
   complexity,
   affordability
 }) {
+  const navigation = useNavigation();
+
+  function selectCarItemHandler() {
+    navigation.navigate("CarDetail", { carId: id });
+  }
+
   return (
     <View style={styles.carItem}>
       <Pressable
         android_ripple={{ color: "#00000054" }}
         style={({ pressed }) => [pressed ? styles.buttonPressed : null]}
-        
+        onPress={selectCarItemHandler}
       >
         <View style={styles.innerContainer}>
           <View>
@@ -52,7 +61,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8
   },
   buttonPressed: {
-    opacity: 0.80
+    opacity: 0.8
   },
   innerContainer: {
     borderRadius: 12,

@@ -9,6 +9,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //Custom Compoents
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CarsOverviewScreen from "./screens/CarsOverviewScreen";
+import CarDetailPage from "./screens/CarDetailPage";
 
 // ------------------------[END IMPORTS]------------------------ //
 
@@ -17,7 +18,7 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <>
-      <StatusBar style="dark" />
+      <StatusBar style="light" />
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName="Categories"
@@ -45,6 +46,7 @@ export default function App() {
             //   };
             // }}
           />
+          <Stack.Screen name="CarDetail" component={CarDetailPage} />
         </Stack.Navigator>
       </NavigationContainer>
     </>
