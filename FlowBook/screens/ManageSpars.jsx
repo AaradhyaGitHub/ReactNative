@@ -2,10 +2,10 @@ import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function ManageMove() {
+export default function ManageSpars() {
     return (
       <View>
-        <Text>Manage Move</Text>
+        <Text>Manage Spars</Text>
       </View>
     );
   }

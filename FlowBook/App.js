@@ -6,7 +6,7 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ManageMove from "./screens/ManageMove";
+import ManageMove from "./screens/ManageSpars";
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
@@ -14,8 +14,8 @@ import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 //custom imports
-import RecentMoves from "./screens/RecentMoves";
-import AllMoves from "./screens/AllMoves";
+import RecentSpars from "./screens/RecentSpars";
+import AllSpars from "./screens/AllSpars";
 import Colors from "./constants/Colors";
 //-------------- [END - IMPORTS] ------------------//
 
@@ -36,22 +36,22 @@ function MovesOverview() {
       }}
     >
       <BottomTabs.Screen
-        name="RecentMoves"
-        component={RecentMoves}
+        name="RecentSpars"
+        component={RecentSpars}
         options={{
-          title: "Recent Moves",
-          tabBarLabel: "Recent Moves",
+          title: "Recent Spars",
+          tabBarLabel: "Recent",
           tabBarIcon: ({ color, size }) => (
             <FontAwesome6 name="hand-fist" size={24} color={color} />
           )
         }}
       />
       <BottomTabs.Screen
-        name="AllMoves"
-        component={AllMoves}
+        name="AllSpars"
+        component={AllSpars}
         options={{
-          title: "All Moves",
-          tabBarLabel: "All Moves",
+          title: "All Spars",
+          tabBarLabel: "All Spars",
           tabBarIcon: ({ color, size, focused }) => (
             <MaterialIcons name="sports-martial-arts" size={24} color={color} />
           )

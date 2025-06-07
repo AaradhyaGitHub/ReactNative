@@ -2,10 +2,10 @@ import React from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 
-export default function AllMoves() {
+export default function RecentSpars() {
   return (
     <View>
-      <Text>These Are All the Moves</Text>
+      <Text>These are the recent Spars</Text>
     </View>
   );
 }
