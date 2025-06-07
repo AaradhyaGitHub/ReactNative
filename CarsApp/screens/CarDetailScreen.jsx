@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 //Expo and React Native packages
-import React, { useContext, useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
 import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
@@ -10,6 +10,7 @@ import { CARS } from "../data/dummy-data";
 import CarDetails from "../components/CarDetails";
 import IconButton from "../components/IconButton";
 import { FavoritesContext } from "../store/context/favorites-context";
+import { useDispatch, useSelector } from "react-redux";
 
 // ------------------------[END IMPORTS]------------------------ //
 
@@ -17,8 +18,13 @@ export default function CarDetailPage({ route, navigation }) {
   const carId = route.params.carId;
   const selectedCar = CARS.find((car) => car.id === carId);
 
-  const favoriteCarsCtx = useContext(FavoritesContext);
-  const carIsFavorite = favoriteCarsCtx.ids.includes(carId);
+  //redux
+  const favoriteMealIds = useSelector((state) => {
+    state.favoriteCars.ids;
+  });
+
+
+  const carIsFavorite = favoriteMealIds.ids.includes(carId);
 
   function changeFavoriteStatusHandler() {
     if (carIsFavorite) {

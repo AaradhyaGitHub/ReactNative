@@ -12,7 +12,7 @@ import { Provider } from "react-redux";
 //Custom Compoents and funcitions
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CarsOverviewScreen from "./screens/CarsOverviewScreen";
-import CarDetailPage from "./screens/CarDetailPage";
+import CarDetailPage from "./screens/CarDetailScreen";
 import FavoritesScreen from "./screens/FavoritesScreen";
 import { store } from "./store/redux/store";
 // ------------------------[END IMPORTS]------------------------ //
