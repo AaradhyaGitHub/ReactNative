@@ -1,36 +1,35 @@
 // @ts-nocheck
 
-//Expo and React Native packages
+//Expo and React / React Native packages
 import React, { useLayoutEffect } from "react";
 import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
+import { useDispatch, useSelector } from "react-redux";
 
 //Custom Compoents and funcitions
 import { CARS } from "../data/dummy-data";
 import CarDetails from "../components/CarDetails";
 import IconButton from "../components/IconButton";
-import { FavoritesContext } from "../store/context/favorites-context";
-import { useDispatch, useSelector } from "react-redux";
+import { addFavorite, removeFavorite } from "../store/redux/favorites";
 
 // ------------------------[END IMPORTS]------------------------ //
 
 export default function CarDetailPage({ route, navigation }) {
+  //redux
+  const favoriteCarIds = useSelector((state) => state.favoriteCars.ids);
+  const dispatch = useDispatch();
+
   const carId = route.params.carId;
   const selectedCar = CARS.find((car) => car.id === carId);
 
-  //redux
-  const favoriteMealIds = useSelector((state) => {
-    state.favoriteCars.ids;
-  });
-
-
-  const carIsFavorite = favoriteMealIds.ids.includes(carId);
+  const carIsFavorite = favoriteCarIds.includes(carId);
 
   function changeFavoriteStatusHandler() {
     if (carIsFavorite) {
-      favoriteCarsCtx.removeFavorite(carId);
+      //call removeFav function
+      dispatch(removeFavorite({ id: carId }));
     } else {
-      favoriteCarsCtx.addFavorite(carId);
+      dispatch(addFavorite({ id: carId }));
     }
   }
 
