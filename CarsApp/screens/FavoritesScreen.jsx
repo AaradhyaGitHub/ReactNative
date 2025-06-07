@@ -1,14 +1,16 @@
-import React, { useContext } from "react";
+// @ts-ignore
+import React from "react";
 import { Text, View, StyleSheet } from "react-native";
 //Expo and React Native
 import CarItemCard from "../components/CarItemCard";
 import { CARS } from "../data/dummy-data";
+import { useSelector } from "react-redux";
 
 export default function FavoritesScreen() {
-  const favoriteCarCtx = useContext(FavoritesContext);
+  // @ts-ignore
+  const favoriteCarIds = useSelector((state) => state.favoriteCars.ids);
   const favoriteCars = CARS.filter((car) =>
-    // @ts-ignore
-    favoriteCarCtx.ids.includes(car.id)
+    favoriteCarIds.includes(car.id)
   );
   return (
     <>
