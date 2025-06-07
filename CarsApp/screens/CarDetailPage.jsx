@@ -9,7 +9,7 @@ import Icon from "react-native-vector-icons/Ionicons";
 import { CARS } from "../data/dummy-data";
 import CarDetails from "../components/CarDetails";
 import IconButton from "../components/IconButton";
-import { FavoritesContext } from "../store/redux/favorites-context";
+import { FavoritesContext } from "../store/context/favorites-context";
 
 // ------------------------[END IMPORTS]------------------------ //
 

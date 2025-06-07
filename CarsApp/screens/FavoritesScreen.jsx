@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { Text, View, StyleSheet } from "react-native";
 //Expo and React Native
 import CarItemCard from "../components/CarItemCard";
-import { FavoritesContext } from "../store/redux/favorites-context";
+import { FavoritesContext } from "../store/context/favorites-context";
 import { CARS } from "../data/dummy-data";
 
 export default function FavoritesScreen() {
@@ -16,7 +16,7 @@ export default function FavoritesScreen() {
       {favoriteCars.length === 0 ? (
         <View style={styles.rootContainer}>
           <Text style={styles.defaultText}>
-            No <Text style={styles.highlight}>cars</Text> added :(
+            No favorite <Text style={styles.highlight}>cars</Text> added :(
           </Text>
         </View>
       ) : (
@@ -29,14 +29,14 @@ export default function FavoritesScreen() {
 const styles = StyleSheet.create({
   rootContainer: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: '70%'
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: "70%"
   },
   defaultText: {
     flex: 1.5,
     textAlign: "center",
-    fontSize: 32,
+    fontSize: 30,
     color: "#818181"
   },
   highlight: {

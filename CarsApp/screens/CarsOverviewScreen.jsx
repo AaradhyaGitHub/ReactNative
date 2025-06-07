@@ -1,8 +1,6 @@
 import React, { useLayoutEffect } from "react";
 // @ts-ignore
-import { View, Text, StyleSheet, FlatList } from "react-native";
 import { CARS, CATEGORIES } from "../data/dummy-data";
-import CarItem from "../components/CarItem";
 import CarItemCard from "../components/CarItemCard";
 
 export default function CarsOverviewScreen({ route, navigation }) {

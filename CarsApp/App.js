@@ -1,4 +1,3 @@
-
 //Expo and React Native packages
 import React from "react";
 
@@ -9,13 +8,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
 
-
 //Custom Compoents and funcitions
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CarsOverviewScreen from "./screens/CarsOverviewScreen";
 import CarDetailPage from "./screens/CarDetailPage";
 import FavoritesScreen from "./screens/FavoritesScreen";
-import FavoritesContextProvider from "./store/redux/favorites-context";
+import FavoritesContextProvider from "./store/context/favorites-context";
 
 // ------------------------[END IMPORTS]------------------------ //
 
