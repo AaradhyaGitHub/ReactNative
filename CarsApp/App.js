@@ -1,17 +1,20 @@
 import React from "react";
 
-//Expo and React Native
+//Expo and React Native packages
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View, Button } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
-//Custom Compoents
+
+
+//Custom Compoents and funcitions
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CarsOverviewScreen from "./screens/CarsOverviewScreen";
 import CarDetailPage from "./screens/CarDetailPage";
 import FavoritesScreen from "./screens/FavoritesScreen";
+import FavoritesContextProvider from "./store/redux/favorites-context";
 
 // ------------------------[END IMPORTS]------------------------ //
 
@@ -33,7 +36,7 @@ function DrawerNavigator() {
             width: "70%", // ← Adjust this value to make the drawer narrower
             marginTop: 92,
             height: "80%",
-            borderTopRightRadius: 0,
+            borderTopRightRadius: 10,
             borderBottomRightRadius: 30,
             overflow: "hidden"
           },
@@ -82,31 +85,33 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Drawer"
-          screenOptions={{
-            headerStyle: { backgroundColor: "#295251" },
-            contentStyle: { backgroundColor: "#c1c1c1ef" },
-            headerTintColor: "#ffffff"
-          }}
-        >
-          <Stack.Screen
-            name="Drawer"
-            component={DrawerNavigator} // switched from Catergories component
-            options={{
-              headerShown: false
+      <FavoritesContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Drawer"
+            screenOptions={{
+              headerStyle: { backgroundColor: "#295251" },
+              contentStyle: { backgroundColor: "#c1c1c1ef" },
+              headerTintColor: "#ffffff"
             }}
-          />
+          >
+            <Stack.Screen
+              name="Drawer"
+              component={DrawerNavigator} // switched from Catergories component
+              options={{
+                headerShown: false
+              }}
+            />
 
-          <Stack.Screen name="CarsOverview" component={CarsOverviewScreen} />
-          <Stack.Screen
-            name="CarDetail"
-            component={CarDetailPage}
-            options={{ title: "About the Car" }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+            <Stack.Screen name="CarsOverview" component={CarsOverviewScreen} />
+            <Stack.Screen
+              name="CarDetail"
+              component={CarDetailPage}
+              options={{ title: "About the Car" }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavoritesContextProvider>
     </>
   );
 }
