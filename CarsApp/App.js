@@ -7,14 +7,14 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { Ionicons } from "@expo/vector-icons";
+import { Provider } from "react-redux";
 
 //Custom Compoents and funcitions
 import CategoriesScreen from "./screens/CategoriesScreen";
 import CarsOverviewScreen from "./screens/CarsOverviewScreen";
 import CarDetailPage from "./screens/CarDetailPage";
 import FavoritesScreen from "./screens/FavoritesScreen";
-import FavoritesContextProvider from "./store/context/favorites-context";
-
+import { store } from "./store/redux/store";
 // ------------------------[END IMPORTS]------------------------ //
 
 const Stack = createNativeStackNavigator();
@@ -84,7 +84,7 @@ export default function App() {
   return (
     <>
       <StatusBar style="light" />
-      <FavoritesContextProvider>
+      <Provider store={store}>
         <NavigationContainer>
           <Stack.Navigator
             initialRouteName="Drawer"
@@ -110,7 +110,7 @@ export default function App() {
             />
           </Stack.Navigator>
         </NavigationContainer>
-      </FavoritesContextProvider>
+      </Provider>
     </>
   );
 }
