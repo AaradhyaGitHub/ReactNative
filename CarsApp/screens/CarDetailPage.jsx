@@ -1,19 +1,31 @@
 // @ts-nocheck
 
-import React, { useLayoutEffect } from "react";
+//Expo and React Native packages
+import React, { useContext, useLayoutEffect } from "react";
 import { Text, View, Image, StyleSheet, ScrollView } from "react-native";
 import Icon from "react-native-vector-icons/Ionicons";
 
+//Custom Compoents and funcitions
 import { CARS } from "../data/dummy-data";
 import CarDetails from "../components/CarDetails";
 import IconButton from "../components/IconButton";
+import { FavoritesContext } from "../store/redux/favorites-context";
+
+// ------------------------[END IMPORTS]------------------------ //
 
 export default function CarDetailPage({ route, navigation }) {
   const carId = route.params.carId;
   const selectedCar = CARS.find((car) => car.id === carId);
 
-  function headerButtonPressHandler() {
-    console.log("Header button clicked");
+  const favoriteCarsCtx = useContext(FavoritesContext);
+  const carIsFavorite = favoriteCarsCtx.ids.includes(carId);
+
+  function changeFavoriteStatusHandler() {
+    if (carIsFavorite) {
+      favoriteCarsCtx.removeFavorite(carId);
+    } else {
+      favoriteCarsCtx.addFavorite(carId);
+    }
   }
 
   useLayoutEffect(() => {
@@ -21,14 +33,14 @@ export default function CarDetailPage({ route, navigation }) {
       headerRight: () => {
         return (
           <IconButton
-            onStarPress={headerButtonPressHandler}
-            icon="star-outline" // or the corrected icon name
+            onStarPress={changeFavoriteStatusHandler}
+            icon={!carIsFavorite ? "star-outline" : "star"} // or the corrected icon name
             color="#fef72d"
           />
         );
       }
     });
-  }, [navigation, headerButtonPressHandler]); // Fixed this line
+  }, [navigation, changeFavoriteStatusHandler]); // Fixed this line
 
   return (
     <ScrollView style={styles.container}>
