@@ -1,7 +1,9 @@
+// @ts-nocheck
 import React, { useLayoutEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import IconButton from "../components/ui/IconButton";
 import Colors from "../constants/Colors";
+import CButton from "../components/ui/CButton";
 
 export default function ManageSpars({ route, navigation }) {
   const editedSparId = route.params?.sparId;
@@ -14,9 +16,27 @@ export default function ManageSpars({ route, navigation }) {
   }, [navigation, isEditing]);
 
   function DeleteSparLogHandler() {}
+  function cancelHandler() {}
+  function confirmHandler() {}
 
   return (
     <View style={styles.container}>
+      <View style={styles.buttonsContainer}>
+        <CButton
+          mode="flat"
+          onPress={cancelHandler}
+          style={styles.button}
+        >
+          Cancel
+        </CButton>
+        <CButton
+          onPress={confirmHandler}
+          style={styles.button}
+
+        >
+          {isEditing ? "Update" : "Add"}
+        </CButton>
+      </View>
       {isEditing && (
         <View style={styles.deleteContainer}>
           <IconButton
@@ -35,12 +55,21 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: Colors.background
+    backgroundColor: Colors.border
+  },
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  button: {
+    minWidth: 120,
+    marginHorizontal: 40
   },
   deleteContainer: {
     marginTop: 16,
-    paddingTop: 8,
-    borderTopWidth: 2,
+    paddingTop: 0,
+    borderTopWidth: 1,
     borderTopColor: Colors.error,
     alignItems: "center"
   }

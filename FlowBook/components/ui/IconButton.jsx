@@ -24,7 +24,6 @@ const styles = StyleSheet.create({
   },
   pressed: {
     opacity: 0.7,
-    
   }
 });
 
