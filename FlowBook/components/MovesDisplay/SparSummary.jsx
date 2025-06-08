@@ -7,6 +7,7 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Colors from "../../constants/Colors";
+import SparItems from "./SparItems";
 
 export default function SparSummary({ spars, periodName }) {
   const sparStats = spars.reduce(
@@ -79,16 +80,15 @@ export default function SparSummary({ spars, periodName }) {
             "rgba(255, 107, 107, 0.15)"
           )}
         </View>
-
-        {/* Recent Activity Section */}
       </View>
+      <SparItems result="draw" date={new Date()} rating="3.2" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    padding: 16
+    padding: 16,
   },
   card: {
     backgroundColor: Colors.card,
@@ -101,7 +101,9 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.1,
     shadowRadius: 8,
-    elevation: 4
+    elevation: 4,
+    marginBottom: 16
+
   },
   header: {
     alignItems: "center",
@@ -138,7 +140,7 @@ const styles = StyleSheet.create({
       height: 4
     },
     shadowOpacity: 0.15,
-    shadowRadius: 8,
+    shadowRadius: 8
   },
   statNumber: {
     fontSize: 28,

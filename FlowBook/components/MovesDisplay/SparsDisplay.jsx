@@ -31,7 +31,6 @@ export default function SparsDisplay({ spars, sparsPeriod }) {
   return (
     <View>
       <SparSummary periodName={sparsPeriod} spars={DUMMY_SPARS} />
-      <SparLogs spars={DUMMY_SPARS} />
     </View>
   );
 }
