@@ -1,10 +1,11 @@
 // @ts-nocheck
 import React, { useContext, useLayoutEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text, View, TextInput } from "react-native";
 import IconButton from "../components/ui/IconButton";
 import Colors from "../constants/Colors";
 import CButton from "../components/ui/CButton";
 import { SparsContext } from "../store/spars-context";
+import { TextInput } from "react-native-gesture-handler";
 
 export default function ManageSpars({ route, navigation }) {
   const sparCtx = useContext(SparsContext);
@@ -47,6 +48,9 @@ export default function ManageSpars({ route, navigation }) {
 
   return (
     <View style={styles.container}>
+      <TextInput 
+        
+      />
       <View style={styles.buttonsContainer}>
         <CButton mode="flat" onPress={cancelHandler} style={styles.button}>
           Cancel
