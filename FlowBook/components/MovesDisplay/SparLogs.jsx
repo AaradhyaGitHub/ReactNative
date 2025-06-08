@@ -1,11 +1,18 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import { FlatList } from "react-native-gesture-handler";
+import { StyleSheet, Text, View, FlatList } from "react-native";
 
-export default function SparLogs({}) {
+function renderIndividualSpars(itemData) {
+  return <Text>{itemData.item.description}</Text>;
+}
+
+export default function SparLogs({ spars }) {
   return (
     <View>
-    
+      <FlatList
+        data={spars}
+        renderItem={renderIndividualSpars}
+        keyExtractor={(item) => item.id}
+      />
     </View>
   );
 }

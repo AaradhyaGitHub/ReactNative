@@ -16,7 +16,7 @@ const DUMMY_SPARS = [
   {
     id: "s2",
     description: "Round 2 with Dan",
-    result: "draw",
+    result: "won",
     date: new Date("2025-06-09")
   },
   {
@@ -31,7 +31,7 @@ export default function SparsDisplay({ spars, sparsPeriod }) {
   return (
     <View>
       <SparSummary periodName={sparsPeriod} spars={DUMMY_SPARS} />
-      <SparLogs />
+      <SparLogs spars={DUMMY_SPARS} />
     </View>
   );
 }
