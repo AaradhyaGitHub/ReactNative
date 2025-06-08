@@ -1,11 +1,14 @@
 // @ts-nocheck
-import React, { useLayoutEffect } from "react";
+import React, { useContext, useLayoutEffect } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import IconButton from "../components/ui/IconButton";
 import Colors from "../constants/Colors";
 import CButton from "../components/ui/CButton";
+import { SparsContext } from "../store/spars-context";
 
 export default function ManageSpars({ route, navigation }) {
+  const sparCtx = useContext(SparsContext);
+
   const editedSparId = route.params?.sparId;
   const isEditing = !!editedSparId;
 
@@ -16,13 +19,28 @@ export default function ManageSpars({ route, navigation }) {
   }, [navigation, isEditing]);
 
   function DeleteSparLogHandler() {
-
+    sparCtx.deleteSpar(editedSparId);
     navigation.goBack();
   }
   function cancelHandler() {
     navigation.goBack();
   }
   function confirmHandler() {
+    if (isEditing) {
+      sparCtx.updateSpar(editedSparId, {
+        description: "update test",
+        result: "won",
+        date: new Date("2019-01-13"),
+        rating: 8
+      });
+    } else {
+      sparCtx.addSpar({
+        description: "add test",
+        result: "won",
+        date: new Date("2020-01-12"),
+        rating: 8
+      });
+    }
 
     navigation.goBack();
   }

@@ -154,7 +154,7 @@ export const SparsContext = createContext({
   spars: [],
   addSpar: ({ description, result, date }) => {},
   deleteSpar: (id) => {},
-  update: (id, { description, result, date }) => {}
+  updateSpar: (id, { description, result, date }) => {}
 });
 
 function sparsReducer(state, action) {
