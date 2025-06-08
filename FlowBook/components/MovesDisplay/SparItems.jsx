@@ -4,6 +4,7 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
+import { useNavigation } from "@react-navigation/native";
 
 // Optional: Your app's color constants
 import Colors from "../../constants/Colors";
@@ -43,10 +44,16 @@ function formatDate(date) {
     year: "numeric"
   });
 }
-function sparLogPressHandler() {}
 
 // Main component
 export default function SparItems({ result, date, rating }) {
+  const navigation = useNavigation();
+
+  function sparLogPressHandler() {
+    // @ts-ignore
+    navigation.navigate("ManageSpars");
+  }
+
   return (
     <Pressable
       style={({ pressed }) => pressed && styles.pressedLog}

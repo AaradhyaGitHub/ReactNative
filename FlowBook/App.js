@@ -28,7 +28,7 @@ const BottomTabs = createBottomTabNavigator();
 function SparsOverview() {
   return (
     <BottomTabs.Navigator
-      screenOptions={{
+      screenOptions={({ route, navigation }) => ({
         headerStyle: { backgroundColor: Colors.background },
         headerTintColor: Colors.textPrimary,
         tabBarStyle: { backgroundColor: Colors.background },
@@ -39,10 +39,10 @@ function SparsOverview() {
             icon="lead-pencil"
             size={30}
             color={tintColor}
-            onPress={console.log("help")}
+            onPress={() => navigation.navigate("ManageSpars")}
           />
         )
-      }}
+      })}
     >
       <BottomTabs.Screen
         name="RecentSpars"
