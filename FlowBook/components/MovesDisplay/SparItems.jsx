@@ -2,6 +2,9 @@ import React from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
+import MaterialIcons from "@expo/vector-icons/MaterialIcons";
+import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 // Optional: Your app's color constants
 import Colors from "../../constants/Colors";
@@ -27,9 +30,9 @@ function renderResultColor(result) {
     case "won":
       return { color: "#fbd042" };
     case "lost":
-      return { color: "#e10000" };
+      return { color: "#a90404" };
     case "draw":
-      return { color: "#6bfc8d" };
+      return { color: "#99fcb0" };
 
     default:
       return { color: "#ffffff" };
@@ -50,18 +53,41 @@ export default function SparItems({ result, date, rating }) {
   return (
     <Pressable>
       <View style={styles.root}>
-        <View style={styles.iconBox}>{renderResultIcon(result)}</View>
-        <Text style={styles.text}>{formatDate(date)}</Text>
-        <Text
-          style={[
-            styles.text,
-            renderResultColor(result),
-            { fontWeight: "bold" }
-          ]}
-        >
-          {result.toUpperCase()}
-        </Text>
-        <Text style={styles.belt}>{rating}</Text>
+        <View style={styles.leftSection}>
+          <View style={styles.iconBox}>{renderResultIcon(result)}</View>
+          <Text
+            style={[
+              styles.resultText,
+              renderResultColor(result),
+              { fontWeight: "bold" }
+            ]}
+          >
+            {result.toUpperCase()}
+          </Text>
+        </View>
+        <View style={styles.centerSection}>
+          <MaterialCommunityIcons
+            name="calendar-month"
+            size={25}
+            color="#fbd042"
+          />
+          <Text style={styles.dateText}>{formatDate(date)}</Text>
+        </View>
+        <View style={styles.rightSection}>
+          <Text style={styles.ratingNumber}>{rating}/10</Text>
+          <View style={styles.boxesContainer}>
+            <FontAwesome name="square" size={10} color="white" />
+            <FontAwesome name="square" size={10} color="white" />
+            <FontAwesome name="square" size={10} color="white" />
+            <FontAwesome name="square" size={10} color="white" />
+            <FontAwesome name="square" size={10} color="white" />
+            <FontAwesome name="square" size={10} color="white" />
+            <FontAwesome name="square" size={10} color="white" />
+            <FontAwesome name="square" size={10} color="white" />
+            <FontAwesome name="square" size={10} color="white" />
+            <FontAwesome name="square" size={10} color="white" />
+          </View>
+        </View>
       </View>
     </Pressable>
   );
@@ -80,19 +106,47 @@ const styles = StyleSheet.create({
     elevation: 2,
     marginHorizontal: 16
   },
+  leftSection: {
+    alignItems: "center",
+    justifyContent: "center"
+  },
   iconBox: {
     width: 40,
-    alignItems: "center"
+    alignItems: "center",
+    marginBottom: 4
   },
-  text: {
-    flex: 1,
-    textAlign: "center",
+  resultText: {
     fontSize: 14,
-    color: "#ffffff"
+    color: "#ffffff",
+    textAlign: "center"
   },
-  belt: {
-    fontSize: 16,
+  centerSection: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  dateText: {
+    fontSize: 14,
+    color: "#ffffff",
+    textAlign: "center",
+    marginTop: 4
+  },
+  rightSection: {
+    alignItems: "center",
+    justifyContent: "center"
+  },
+  ratingNumber: {
+    fontSize: 18,
     fontWeight: "bold",
-    color: "#ffffff"
+    color: "#FFD700", // Gold color to stand out
+    textShadowColor: "#000000",
+    textShadowOffset: { width: 1, height: 1 },
+    textShadowRadius: 2,
+    marginBottom: 4
+  },
+  boxesContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 2 // Minimal gap between boxes
   }
 });
