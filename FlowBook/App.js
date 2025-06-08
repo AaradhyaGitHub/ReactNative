@@ -75,7 +75,12 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="SparsOverview">
+        <Stack.Navigator
+          initialRouteName="SparsOverview"
+          screenOptions={{
+            headerStyle: { backgroundColor: Colors.background }
+          }}
+        >
           <Stack.Screen
             name="SparsOverview"
             component={SparsOverview}
@@ -83,7 +88,14 @@ export default function App() {
               headerShown: false
             }}
           />
-          <Stack.Screen name="ManageSpars" component={ManageSpars} />
+          <Stack.Screen
+            name="ManageSpars"
+            component={ManageSpars}
+            options={{
+              presentation: 'modal',
+              
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>

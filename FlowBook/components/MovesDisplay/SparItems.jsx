@@ -46,12 +46,14 @@ function formatDate(date) {
 }
 
 // Main component
-export default function SparItems({ result, date, rating }) {
+export default function SparItems({ id, result, date, rating }) {
   const navigation = useNavigation();
 
   function sparLogPressHandler() {
     // @ts-ignore
-    navigation.navigate("ManageSpars");
+    navigation.navigate("ManageSpars", {
+      sparId: id
+    });
   }
 
   return (
