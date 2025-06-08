@@ -1,13 +1,14 @@
 import React from "react";
 import { StyleSheet, Text, View, FlatList } from "react-native";
+import SparItems from "./SparItems";
 
 function renderIndividualSpars(itemData) {
-  return <Text>{itemData.item.description}</Text>;
+  return <SparItems {...itemData.item} />;
 }
 
 export default function SparLogs({ spars }) {
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       <FlatList
         data={spars}
         renderItem={renderIndividualSpars}

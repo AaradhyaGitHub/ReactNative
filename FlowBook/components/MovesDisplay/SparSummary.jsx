@@ -81,7 +81,6 @@ export default function SparSummary({ spars, periodName }) {
           )}
         </View>
       </View>
-      <SparItems result="draw" date={new Date()} rating="3.2" />
     </View>
   );
 }

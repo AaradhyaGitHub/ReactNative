@@ -1,8 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, View, Pressable } from "react-native";
-import SimpleLineIcons from "@expo/vector-icons/SimpleLineIcons";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 
 // Optional: Your app's color constants
 import Colors from "../../constants/Colors";
@@ -11,23 +10,38 @@ import Colors from "../../constants/Colors";
 function renderResultIcon(result) {
   switch (result) {
     case "won":
-      return <SimpleLineIcons name="trophy" size={28} color="#FFD700" />;
+      return <FontAwesome6 name="trophy" size={24} color="#fbd042" />;
     case "lost":
-      return <Ionicons name="skull-outline" size={28} color="#FF5C5C" />;
+      return <FontAwesome5 name="skull-crossbones" size={24} color="#a90404" />;
+
     case "draw":
-      return <FontAwesome name="handshake-o" size={28} color="#000000" />;
+      return <FontAwesome6 name="handshake-simple" size={24} color="#99fcb0" />;
+
     default:
       return null;
   }
 }
 
+function renderResultColor(result) {
+  switch (result) {
+    case "won":
+      return { color: "#fbd042" };
+    case "lost":
+      return { color: "#e10000" };
+    case "draw":
+      return { color: "#6bfc8d" };
+
+    default:
+      return { color: "#ffffff" };
+  }
+}
 
 // Format date nicely
 function formatDate(date) {
   return new Date(date).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
-    year: "numeric",
+    year: "numeric"
   });
 }
 
@@ -38,7 +52,15 @@ export default function SparItems({ result, date, rating }) {
       <View style={styles.root}>
         <View style={styles.iconBox}>{renderResultIcon(result)}</View>
         <Text style={styles.text}>{formatDate(date)}</Text>
-        <Text style={styles.text}>{result.toUpperCase()}</Text>
+        <Text
+          style={[
+            styles.text,
+            renderResultColor(result),
+            { fontWeight: "bold" }
+          ]}
+        >
+          {result.toUpperCase()}
+        </Text>
         <Text style={styles.belt}>{rating}</Text>
       </View>
     </Pressable>
@@ -56,21 +78,21 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     marginVertical: 6,
     elevation: 2,
+    marginHorizontal: 16
   },
   iconBox: {
     width: 40,
-    alignItems: "center",
+    alignItems: "center"
   },
   text: {
     flex: 1,
     textAlign: "center",
     fontSize: 14,
-    color: '#ffffff',
+    color: "#ffffff"
   },
   belt: {
     fontSize: 16,
     fontWeight: "bold",
-    color: '#ffffff',
-
-  },
+    color: "#ffffff"
+  }
 });
