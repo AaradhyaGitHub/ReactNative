@@ -6,10 +6,9 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import ManageMove from "./screens/ManageSpars";
+import ManageSpars from "./screens/ManageSpars";
 
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
 
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
@@ -17,6 +16,8 @@ import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import RecentSpars from "./screens/RecentSpars";
 import AllSpars from "./screens/AllSpars";
 import Colors from "./constants/Colors";
+import IconButton from "./components/ui/IconButton";
+
 //-------------- [END - IMPORTS] ------------------//
 
 //-------------- NavSetup ------------------//
@@ -24,7 +25,7 @@ const Stack = createNativeStackNavigator();
 const BottomTabs = createBottomTabNavigator();
 
 //nested navigation
-function MovesOverview() {
+function SparsOverview() {
   return (
     <BottomTabs.Navigator
       screenOptions={{
@@ -32,7 +33,15 @@ function MovesOverview() {
         headerTintColor: Colors.textPrimary,
         tabBarStyle: { backgroundColor: Colors.background },
         tabBarActiveTintColor: Colors.primary,
-        tabBarInactiveTintColor: Colors.textSecondary
+        tabBarInactiveTintColor: Colors.textSecondary,
+        headerRight: ({ tintColor }) => (
+          <IconButton
+            icon="lead-pencil"
+            size={30}
+            color={tintColor}
+            onPress={console.log("help")}
+          />
+        )
       }}
     >
       <BottomTabs.Screen
@@ -66,15 +75,15 @@ export default function App() {
     <>
       <StatusBar style="auto" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="MovesOverview">
+        <Stack.Navigator initialRouteName="SparsOverview">
           <Stack.Screen
-            name="MovesOverview"
-            component={MovesOverview}
+            name="SparsOverview"
+            component={SparsOverview}
             options={{
               headerShown: false
             }}
           />
-          <Stack.Screen name="ManageMove" component={ManageMove} />
+          <Stack.Screen name="ManageSpars" component={ManageSpars} />
         </Stack.Navigator>
       </NavigationContainer>
     </>

@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, Pressable } from "react-native";
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import MaterialCommunityIcons from "@expo/vector-icons/MaterialCommunityIcons";
-import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 
 // Optional: Your app's color constants
@@ -24,7 +23,6 @@ function renderResultIcon(result) {
       return null;
   }
 }
-
 function renderResultColor(result) {
   switch (result) {
     case "won":
@@ -38,8 +36,6 @@ function renderResultColor(result) {
       return { color: "#ffffff" };
   }
 }
-
-// Format date nicely
 function formatDate(date) {
   return new Date(date).toLocaleDateString("en-US", {
     month: "short",
@@ -47,11 +43,15 @@ function formatDate(date) {
     year: "numeric"
   });
 }
+function sparLogPressHandler() {}
 
 // Main component
 export default function SparItems({ result, date, rating }) {
   return (
-    <Pressable>
+    <Pressable
+      style={({ pressed }) => pressed && styles.pressedLog}
+      onPress={sparLogPressHandler}
+    >
       <View style={styles.root}>
         <View style={styles.leftSection}>
           <View style={styles.iconBox}>{renderResultIcon(result)}</View>
@@ -148,5 +148,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 2 // Minimal gap between boxes
+  },
+  pressedLog: {
+    opacity: 0.75
   }
 });
