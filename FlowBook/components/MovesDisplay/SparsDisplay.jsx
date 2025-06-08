@@ -6,13 +6,11 @@ import { StyleSheet, Text, View } from "react-native";
 import SparSummary from "./SparSummary";
 import SparLogs from "./SparLogs";
 
-
-
 export default function SparsDisplay({ spars, sparsPeriod }) {
   return (
     <View style={{ flex: 1 }}>
-      <SparSummary periodName={sparsPeriod} spars={DUMMY_SPARS} />
-      <SparLogs spars={DUMMY_SPARS} />
+      <SparSummary spars={spars} periodName={sparsPeriod} />
+      <SparLogs spars={spars} />
     </View>
   );
 }

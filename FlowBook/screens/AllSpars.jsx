@@ -1,10 +1,11 @@
-import React from "react";
-import { StatusBar } from "expo-status-bar";
+import React, { useContext } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import SparsDisplay from "../components/MovesDisplay/SparsDisplay";
+import { SparsContext } from "../store/spars-context";
 
 export default function AllSpars() {
-  return <SparsDisplay sparsPeriod="Total"/>;
+  const sparsCtx = useContext(SparsContext);
+  return <SparsDisplay spars={sparsCtx.spars} sparsPeriod="Total" />;
 }
 
 const styles = StyleSheet.create({

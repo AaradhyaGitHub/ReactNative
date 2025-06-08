@@ -6,10 +6,10 @@ import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+
+//icon imports
 import ManageSpars from "./screens/ManageSpars";
-
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
-
 import FontAwesome6 from "@expo/vector-icons/FontAwesome6";
 
 //custom imports
@@ -17,6 +17,7 @@ import RecentSpars from "./screens/RecentSpars";
 import AllSpars from "./screens/AllSpars";
 import Colors from "./constants/Colors";
 import IconButton from "./components/ui/IconButton";
+import SparsContextProvider from "./store/spars-context";
 
 //-------------- [END - IMPORTS] ------------------//
 
@@ -74,30 +75,31 @@ export default function App() {
   return (
     <>
       <StatusBar style="auto" />
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="SparsOverview"
-          screenOptions={{
-            headerStyle: { backgroundColor: Colors.background }
-          }}
-        >
-          <Stack.Screen
-            name="SparsOverview"
-            component={SparsOverview}
-            options={{
-              headerShown: false
+      <SparsContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="SparsOverview"
+            screenOptions={{
+              headerStyle: { backgroundColor: Colors.background }
             }}
-          />
-          <Stack.Screen
-            name="ManageSpars"
-            component={ManageSpars}
-            options={{
-              presentation: 'modal',
-              
-            }}
-          />
-        </Stack.Navigator>
-      </NavigationContainer>
+          >
+            <Stack.Screen
+              name="SparsOverview"
+              component={SparsOverview}
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="ManageSpars"
+              component={ManageSpars}
+              options={{
+                presentation: "modal"
+              }}
+            />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </SparsContextProvider>
     </>
   );
 }

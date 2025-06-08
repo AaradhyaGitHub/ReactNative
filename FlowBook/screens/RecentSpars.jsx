@@ -1,10 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, Text, View } from "react-native";
 import SparsDisplay from "../components/MovesDisplay/SparsDisplay";
+import { SparsContext } from "../store/spars-context";
+import getDateMinusDays from "../util/date";
 
 export default function RecentSpars() {
-  return <SparsDisplay sparsPeriod="Last 7 days" />;
+  const sparsCtx = useContext(SparsContext);
+
+  const recentSpars = sparsCtx.spars.filter((spar) => {
+    const today = new Date();
+    const dateRange = getDateMinusDays(today, 7);
+
+    return new Date(spar.date) > dateRange;
+  });
+
+  return <SparsDisplay spars={recentSpars} sparsPeriod="Last 7 days" />;
 }
 
 const styles = StyleSheet.create({
