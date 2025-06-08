@@ -29,14 +29,14 @@ export default function ManageSpars({ route, navigation }) {
     if (isEditing) {
       sparCtx.updateSpar(editedSparId, {
         description: "update test",
-        result: "won",
+        result: "UPDATE!!",
         date: new Date("2019-01-13"),
         rating: 8
       });
     } else {
       sparCtx.addSpar({
         description: "add test",
-        result: "won",
+        result: "ADD!!",
         date: new Date("2020-01-12"),
         rating: 8
       });

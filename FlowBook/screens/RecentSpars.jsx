@@ -12,10 +12,16 @@ export default function RecentSpars() {
     const today = new Date();
     const dateRange = getDateMinusDays(today, 7);
 
-    return new Date(spar.date) > dateRange;
+    return spar.date >= dateRange && spar.date <= today;
   });
 
-  return <SparsDisplay spars={recentSpars} sparsPeriod="Last 7 days" />;
+  return (
+    <SparsDisplay
+      spars={recentSpars}
+      sparsPeriod="Last 7 days"
+      fallbackText="No Spar Logged for the last 7 days"
+    />
+  );
 }
 
 const styles = StyleSheet.create({
