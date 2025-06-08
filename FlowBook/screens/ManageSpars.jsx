@@ -15,25 +15,25 @@ export default function ManageSpars({ route, navigation }) {
     });
   }, [navigation, isEditing]);
 
-  function DeleteSparLogHandler() {}
-  function cancelHandler() {}
-  function confirmHandler() {}
+  function DeleteSparLogHandler() {
+
+    navigation.goBack();
+  }
+  function cancelHandler() {
+    navigation.goBack();
+  }
+  function confirmHandler() {
+
+    navigation.goBack();
+  }
 
   return (
     <View style={styles.container}>
       <View style={styles.buttonsContainer}>
-        <CButton
-          mode="flat"
-          onPress={cancelHandler}
-          style={styles.button}
-        >
+        <CButton mode="flat" onPress={cancelHandler} style={styles.button}>
           Cancel
         </CButton>
-        <CButton
-          onPress={confirmHandler}
-          style={styles.button}
-
-        >
+        <CButton onPress={confirmHandler} style={styles.button}>
           {isEditing ? "Update" : "Add"}
         </CButton>
       </View>
