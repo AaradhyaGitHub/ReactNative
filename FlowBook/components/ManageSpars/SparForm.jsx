@@ -3,7 +3,8 @@ import { Pressable, View, Text, StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
 import Input from "./Input";
 
-export default function SparForm() {
+import CButton from "../ui/CButton";
+export default function SparForm({ onCancel, onSubmit, submitButtonLabel }) {
   const [inputValues, setInputValues] = useState({
     result: "",
     date: "",
@@ -19,6 +20,8 @@ export default function SparForm() {
       };
     });
   }
+
+  function submitHandler() {}
 
   return (
     <View>
@@ -57,7 +60,27 @@ export default function SparForm() {
             value: inputValues.rating
           }}
         />
+        <View style={styles.buttonsContainer}>
+          <CButton mode="flat" onPress={onCancel} style={styles.button}>
+            Cancel
+          </CButton>
+          <CButton onPress={submitHandler} style={styles.button}>
+            {submitButtonLabel}
+          </CButton>
+        </View>
       </View>
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  buttonsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  button: {
+    minWidth: 120,
+    marginHorizontal: 40
+  }
+});

@@ -48,16 +48,11 @@ export default function ManageSpars({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <SparForm />
+      <SparForm
+        onCancel={cancelHandler}
+        submitButtonLabel={isEditing ? "Update" : "Add"}
+      />
 
-      <View style={styles.buttonsContainer}>
-        <CButton mode="flat" onPress={cancelHandler} style={styles.button}>
-          Cancel
-        </CButton>
-        <CButton onPress={confirmHandler} style={styles.button}>
-          {isEditing ? "Update" : "Add"}
-        </CButton>
-      </View>
       {isEditing && (
         <View style={styles.deleteContainer}>
           <IconButton
@@ -76,17 +71,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: 'black'
+    backgroundColor: "black"
   },
-  buttonsContainer: {
-    flexDirection: "row",
-    justifyContent: "center",
-    alignItems: "center"
-  },
-  button: {
-    minWidth: 120,
-    marginHorizontal: 40
-  },
+
   deleteContainer: {
     marginTop: 16,
     paddingTop: 0,
