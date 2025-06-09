@@ -13,11 +13,11 @@ import Colors from "../../constants/Colors";
 function renderResultIcon(result) {
   switch (result) {
     case "won":
-      return <FontAwesome6 name="trophy" size={24} color="#fbd042" />;
+      return <FontAwesome6 name="trophy" size={24} color="#ffc400" />;
     case "lost":
-      return <FontAwesome5 name="skull-crossbones" size={24} color="#a90404" />;
+      return <FontAwesome5 name="skull-crossbones" size={24} color="#fa0202" />;
     case "draw":
-      return <FontAwesome6 name="handshake-simple" size={24} color="#99fcb0" />;
+      return <FontAwesome6 name="handshake-simple" size={24} color="#71fe05" />;
 
     default:
       return null;
@@ -27,11 +27,11 @@ function renderResultIcon(result) {
 function renderResultColor(result) {
   switch (result) {
     case "won":
-      return { color: "#fbd042" };
+      return { color: "#ffc400" };
     case "lost":
-      return { color: "#a90404" };
+      return { color: "#fa0202" };
     case "draw":
-      return { color: "#99fcb0" };
+      return { color: "#71fe05" };
 
     default:
       return { color: "#ffffff" };

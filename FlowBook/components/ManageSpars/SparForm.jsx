@@ -1,9 +1,47 @@
 import React, { useState } from "react";
-import { Pressable, View, Text, StyleSheet } from "react-native";
+import { Pressable, View, Text, StyleSheet, Alert } from "react-native";
 import Colors from "../../constants/Colors";
 import Input from "./Input";
 
 import CButton from "../ui/CButton";
+
+function validateDate(dateString) {
+  // Check if it's a string in YYYY-MM-DD format
+  if (
+    typeof dateString !== "string" ||
+    !dateString.match(/^\d{4}-\d{2}-\d{2}$/)
+  ) {
+    return false;
+  }
+
+  const [year, month, day] = dateString.split("-").map(Number);
+
+  // Check year range (2000-2125)
+  if (year < 2000 || year > 2125) {
+    return false;
+  }
+
+  // Check month range (1-12)
+  if (month < 1 || month > 12) {
+    return false;
+  }
+
+  // Check day range (1-31, but also validate against the actual month/year)
+  if (day < 1 || day > 31) {
+    return false;
+  }
+
+  // Create a date object and verify it matches the input
+  // This catches invalid dates like Feb 30, Nov 31, etc.
+  const date = new Date(year, month - 1, day);
+
+  return (
+    date.getFullYear() === year &&
+    date.getMonth() === month - 1 &&
+    date.getDate() === day
+  );
+}
+
 export default function SparForm({
   onCancel,
   onSubmit,
@@ -33,6 +71,28 @@ export default function SparForm({
       description: inputValues.description,
       rating: +inputValues.rating
     };
+
+    const resultIsValid =
+      sparData.result === "won" ||
+      sparData.result === "draw" ||
+      sparData.result === "lost";
+
+    const descriptionIsValid = sparData.description.trim().length > 0;
+    const ratingIsValid = sparData.rating <= 10 && sparData.rating >= 0;
+    const dateIsValid = validateDate(sparData.date);
+
+    if (
+      !resultIsValid ||
+      !descriptionIsValid ||
+      !ratingIsValid ||
+      !dateIsValid
+    ) {
+      Alert.alert(
+        "Invalid input",
+        "Please ensure description is not empty, date matches the format and the result is won, lost or draw "
+      );
+      return;
+    }
     onSubmit(sparData);
   }
 
