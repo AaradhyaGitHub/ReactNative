@@ -1,10 +1,24 @@
-import React from "react";
+import React, { useState } from "react";
 import { Pressable, View, Text, StyleSheet } from "react-native";
 import Colors from "../../constants/Colors";
 import Input from "./Input";
 
 export default function SparForm() {
-  function resultChangedHandler() {}
+  const [inputValues, setInputValues] = useState({
+    result: "",
+    date: "",
+    description: "",
+    rating: ""
+  });
+
+  function inputChangedHandler(inputIdentifier, enteredValue) {
+    setInputValues((currentInputValues) => {
+      return {
+        ...currentInputValues,
+        [inputIdentifier]: enteredValue
+      };
+    });
+  }
 
   return (
     <View>
@@ -12,7 +26,8 @@ export default function SparForm() {
         <Input
           label="Result"
           textInputConfig={{
-            onChangeText: resultChangedHandler
+            onChangeText: inputChangedHandler.bind(this, "result"),
+            value: inputValues.result
           }}
         />
         <Input
@@ -20,7 +35,8 @@ export default function SparForm() {
           textInputConfig={{
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
-            onChange: () => {}
+            onChangeText: inputChangedHandler.bind(this, "date"),
+            value: inputValues.date
           }}
         />
         <Input
@@ -28,13 +44,17 @@ export default function SparForm() {
           textInputConfig={{
             placeholder: "Include details about your spar",
             multiline: true,
-            autocorrect: false
+            autocorrect: false,
+            onChangeText: inputChangedHandler.bind(this, "description"),
+            value: inputValues.description
           }}
         />
         <Input
           label="Rating"
           textInputConfig={{
-            keyboardType: "decimal-pad"
+            keyboardType: "decimal-pad",
+            onChangeText: inputChangedHandler.bind(this, "rating"),
+            value: inputValues.rating
           }}
         />
       </View>
