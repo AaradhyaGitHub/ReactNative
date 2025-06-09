@@ -5,7 +5,7 @@ import IconButton from "../components/ui/IconButton";
 import Colors from "../constants/Colors";
 import CButton from "../components/ui/CButton";
 import { SparsContext } from "../store/spars-context";
-import { TextInput } from "react-native-gesture-handler";
+import SparForm from "../components/ManageSpars/SparForm";
 
 export default function ManageSpars({ route, navigation }) {
   const sparCtx = useContext(SparsContext);
@@ -48,9 +48,8 @@ export default function ManageSpars({ route, navigation }) {
 
   return (
     <View style={styles.container}>
-      <TextInput 
-        
-      />
+      <SparForm />
+
       <View style={styles.buttonsContainer}>
         <CButton mode="flat" onPress={cancelHandler} style={styles.button}>
           Cancel
