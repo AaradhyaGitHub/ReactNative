@@ -6,6 +6,7 @@ import Colors from "../constants/Colors";
 import CButton from "../components/ui/CButton";
 import { SparsContext } from "../store/spars-context";
 import SparForm from "../components/ManageSpars/SparForm";
+import { storeSpar } from "../util/http";
 
 export default function ManageSpars({ route, navigation }) {
   const sparCtx = useContext(SparsContext);
@@ -32,6 +33,7 @@ export default function ManageSpars({ route, navigation }) {
     if (isEditing) {
       sparCtx.updateSpar(editedSparId, sparData);
     } else {
+      storeSpar(sparData);
       sparCtx.addSpar(sparData);
     }
 
