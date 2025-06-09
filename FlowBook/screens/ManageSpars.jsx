@@ -76,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 24,
-    backgroundColor: Colors.border
+    backgroundColor: 'black'
   },
   buttonsContainer: {
     flexDirection: "row",

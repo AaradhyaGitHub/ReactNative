@@ -88,6 +88,7 @@ export default function App() {
               component={SparsOverview}
               options={{
                 headerShown: false
+                
               }}
             />
             <Stack.Screen
