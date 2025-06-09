@@ -13,6 +13,8 @@ export default function ManageSpars({ route, navigation }) {
   const editedSparId = route.params?.sparId;
   const isEditing = !!editedSparId;
 
+  const selectedSpar = sparCtx.spars.find((spar) => spar.id === editedSparId);
+
   useLayoutEffect(() => {
     navigation.setOptions({
       title: isEditing ? "Edit Your Spar Log" : "Add Sparring Log"
@@ -42,6 +44,7 @@ export default function ManageSpars({ route, navigation }) {
         onCancel={cancelHandler}
         onSubmit={confirmHandler}
         submitButtonLabel={isEditing ? "Update" : "Add"}
+        defaultFormValues={selectedSpar}
       />
 
       {isEditing && (

@@ -4,12 +4,17 @@ import Colors from "../../constants/Colors";
 import Input from "./Input";
 
 import CButton from "../ui/CButton";
-export default function SparForm({ onCancel, onSubmit, submitButtonLabel }) {
+export default function SparForm({
+  onCancel,
+  onSubmit,
+  submitButtonLabel,
+  defaultFormValues
+}) {
   const [inputValues, setInputValues] = useState({
-    result: "",
-    date: "",
-    description: "",
-    rating: ""
+    result: defaultFormValues ? defaultFormValues.result : "",
+    date: defaultFormValues ? defaultFormValues.date : "",
+    description: defaultFormValues ? defaultFormValues.description : "",
+    rating: defaultFormValues ? defaultFormValues.rating.toString() : ""
   });
 
   function inputChangedHandler(inputIdentifier, enteredValue) {
