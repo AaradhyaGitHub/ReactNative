@@ -21,7 +21,15 @@ export default function SparForm({ onCancel, onSubmit, submitButtonLabel }) {
     });
   }
 
-  function submitHandler() {}
+  function submitHandler() {
+    const sparData = {
+      result: inputValues.result,
+      date: inputValues.date, // Keep as string, don't convert to Date
+      description: inputValues.description,
+      rating: +inputValues.rating
+    };
+    onSubmit(sparData);
+  }
 
   return (
     <View>

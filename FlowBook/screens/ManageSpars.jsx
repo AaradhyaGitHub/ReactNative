@@ -26,21 +26,11 @@ export default function ManageSpars({ route, navigation }) {
   function cancelHandler() {
     navigation.goBack();
   }
-  function confirmHandler() {
+  function confirmHandler(sparData) {
     if (isEditing) {
-      sparCtx.updateSpar(editedSparId, {
-        description: "update test",
-        result: "UPDATE!!",
-        date: new Date("2019-01-13"),
-        rating: 8
-      });
+      sparCtx.updateSpar(editedSparId, sparData);
     } else {
-      sparCtx.addSpar({
-        description: "add test",
-        result: "ADD!!",
-        date: new Date("2020-01-12"),
-        rating: 8
-      });
+      sparCtx.addSpar(sparData);
     }
 
     navigation.goBack();
@@ -50,6 +40,7 @@ export default function ManageSpars({ route, navigation }) {
     <View style={styles.container}>
       <SparForm
         onCancel={cancelHandler}
+        onSubmit={confirmHandler}
         submitButtonLabel={isEditing ? "Update" : "Add"}
       />
 

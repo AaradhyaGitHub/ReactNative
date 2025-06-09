@@ -16,7 +16,6 @@ function renderResultIcon(result) {
       return <FontAwesome6 name="trophy" size={24} color="#fbd042" />;
     case "lost":
       return <FontAwesome5 name="skull-crossbones" size={24} color="#a90404" />;
-
     case "draw":
       return <FontAwesome6 name="handshake-simple" size={24} color="#99fcb0" />;
 
@@ -24,6 +23,7 @@ function renderResultIcon(result) {
       return null;
   }
 }
+
 function renderResultColor(result) {
   switch (result) {
     case "won":
@@ -37,8 +37,21 @@ function renderResultColor(result) {
       return { color: "#ffffff" };
   }
 }
-function formatDate(date) {
-  return new Date(date).toLocaleDateString("en-US", {
+
+function formatDate(dateString) {
+  // If it's already a string in YYYY-MM-DD format, parse it as local date
+  if (typeof dateString === 'string' && dateString.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    const [year, month, day] = dateString.split('-');
+    const date = new Date(year, month - 1, day); // month is 0-indexed
+    return date.toLocaleDateString("en-US", {
+      month: "short",
+      day: "numeric",
+      year: "numeric"
+    });
+  }
+  
+  // Fallback for existing Date objects (in case you have mixed data)
+  return new Date(dateString).toLocaleDateString("en-US", {
     month: "short",
     day: "numeric",
     year: "numeric"

@@ -11,8 +11,13 @@ export default function RecentSpars() {
   const recentSpars = sparsCtx.spars.filter((spar) => {
     const today = new Date();
     const dateRange = getDateMinusDays(today, 7);
-
-    return spar.date >= dateRange && spar.date <= today;
+    
+    // Convert string date to Date object for comparison
+    const sparDate = typeof spar.date === 'string' 
+      ? new Date(spar.date + 'T12:00:00') // Add noon time to avoid timezone issues
+      : spar.date;
+  
+    return sparDate >= dateRange && sparDate <= today;
   });
 
   return (
