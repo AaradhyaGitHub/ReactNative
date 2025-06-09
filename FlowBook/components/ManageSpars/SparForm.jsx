@@ -131,6 +131,7 @@ export default function SparForm({
       <View>
         <Input
           label="Result"
+          inValid={!inputs.result.isValid}
           textInputConfig={{
             onChangeText: inputChangedHandler.bind(this, "result"),
             value: inputs.result.value
@@ -138,6 +139,7 @@ export default function SparForm({
         />
         <Input
           label="Date"
+          inValid={!inputs.date.isValid}
           textInputConfig={{
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
@@ -147,6 +149,7 @@ export default function SparForm({
         />
         <Input
           label="Description"
+          inValid={!inputs.description.isValid}
           textInputConfig={{
             placeholder: "Include details about your spar",
             multiline: true,
@@ -157,6 +160,7 @@ export default function SparForm({
         />
         <Input
           label="Rating"
+          inValid={!inputs.rating.isValid}
           textInputConfig={{
             keyboardType: "decimal-pad",
             onChangeText: inputChangedHandler.bind(this, "rating"),
@@ -164,7 +168,9 @@ export default function SparForm({
           }}
         />
         {formIsInvalid && (
-          <Text style={{ color: "red" }}>Invalid input! Try Again</Text>
+          <Text style={{ textAlign: "center", color: "red" }}>
+            Invalid input! Try Again
+          </Text>
         )}
         <View style={styles.buttonsContainer}>
           <CButton mode="flat" onPress={onCancel} style={styles.button}>

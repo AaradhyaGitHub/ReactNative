@@ -1,17 +1,24 @@
+// @ts-nocheck
 import React from "react";
-import { Pressable, View, Text, StyleSheet } from "react-native";
-import Colors from "../../constants/Colors";
+import { View, Text, StyleSheet } from "react-native";
 import { TextInput } from "react-native";
+import Colors from "../../constants/Colors";
 
-export default function Input({ label, textInputConfig }) {
+export default function Input({ label, textInputConfig, inValid }) {
   let inputStyles = [styles.input];
 
   if (textInputConfig && textInputConfig.multiline) {
     inputStyles.push(styles.inputMultiLine);
   }
+  if (inValid) {
+    inputStyles.push(styles.inValidInput);
+  }
+
   return (
     <View style={styles.inputContainer}>
-      <Text style={styles.label}>{label}</Text>
+      <Text style={[styles.label, inValid && styles.inValidLabel]}>
+        {label}
+      </Text>
       <TextInput style={inputStyles} {...textInputConfig} />
     </View>
   );
@@ -37,5 +44,11 @@ const styles = StyleSheet.create({
   inputMultiLine: {
     minHeight: 100,
     textAlignVertical: "top"
+  },
+  inValidLabel: {
+    color: Colors.error
+  },
+  inValidInput: {
+    backgroundColor: "#ab5858"
   }
 });
