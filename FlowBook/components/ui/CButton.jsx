@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
     textAlign: "center"
   },
   flatText: {
-    color: Colors.primary,
+    color: 'white',
     textAlign: "center"
   },
   flatPressed: {

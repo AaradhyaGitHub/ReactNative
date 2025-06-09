@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { useState } from "react";
 import { Pressable, View, Text, StyleSheet, Alert } from "react-native";
 import Colors from "../../constants/Colors";
@@ -48,28 +49,40 @@ export default function SparForm({
   submitButtonLabel,
   defaultFormValues
 }) {
-  const [inputValues, setInputValues] = useState({
-    result: defaultFormValues ? defaultFormValues.result : "",
-    date: defaultFormValues ? defaultFormValues.date : "",
-    description: defaultFormValues ? defaultFormValues.description : "",
-    rating: defaultFormValues ? defaultFormValues.rating.toString() : ""
+  const [inputs, setInputs] = useState({
+    result: {
+      value: defaultFormValues ? defaultFormValues.result : "",
+      isValid: true
+    },
+    date: {
+      value: defaultFormValues ? defaultFormValues.date : "",
+      isValid: true
+    },
+    description: {
+      value: defaultFormValues ? defaultFormValues.description : "",
+      isValid: true
+    },
+    rating: {
+      value: defaultFormValues ? defaultFormValues.rating.toString() : "",
+      isValid: true
+    }
   });
 
   function inputChangedHandler(inputIdentifier, enteredValue) {
-    setInputValues((currentInputValues) => {
+    setInputs((currentInputs) => {
       return {
-        ...currentInputValues,
-        [inputIdentifier]: enteredValue
+        ...currentInputs,
+        [inputIdentifier]: { value: enteredValue, isValid: true }
       };
     });
   }
 
   function submitHandler() {
     const sparData = {
-      result: inputValues.result,
-      date: inputValues.date, // Keep as string, don't convert to Date
-      description: inputValues.description,
-      rating: +inputValues.rating
+      result: inputs.result.value,
+      date: inputs.date.value, // Keep as string, don't convert to Date
+      description: inputs.description.value,
+      rating: +inputs.rating.value
     };
 
     const resultIsValid =
@@ -87,14 +100,31 @@ export default function SparForm({
       !ratingIsValid ||
       !dateIsValid
     ) {
-      Alert.alert(
-        "Invalid input",
-        "Please ensure description is not empty, date matches the format and the result is won, lost or draw "
-      );
+      //   Alert.alert(
+      //     "Invalid input",
+      //     "Please ensure description is not empty, date matches the format and the result is won, lost or draw "
+      //   );
+      setInputs((currInputs) => {
+        return {
+          result: { value: currInputs.result.value, isValid: resultIsValid },
+          description: {
+            value: currInputs.description.value,
+            isValid: descriptionIsValid
+          },
+          rating: { value: currInputs.rating.value, isValid: ratingIsValid },
+          date: { value: currInputs.date.value, isValid: dateIsValid }
+        };
+      });
       return;
     }
     onSubmit(sparData);
   }
+
+  const formIsInvalid =
+    !inputs.result.isValid ||
+    !inputs.description.isValid ||
+    !inputs.date.isValid ||
+    !inputs.rating.isValid;
 
   return (
     <View>
@@ -103,7 +133,7 @@ export default function SparForm({
           label="Result"
           textInputConfig={{
             onChangeText: inputChangedHandler.bind(this, "result"),
-            value: inputValues.result
+            value: inputs.result.value
           }}
         />
         <Input
@@ -112,7 +142,7 @@ export default function SparForm({
             placeholder: "YYYY-MM-DD",
             maxLength: 10,
             onChangeText: inputChangedHandler.bind(this, "date"),
-            value: inputValues.date
+            value: inputs.date.value
           }}
         />
         <Input
@@ -122,7 +152,7 @@ export default function SparForm({
             multiline: true,
             autocorrect: false,
             onChangeText: inputChangedHandler.bind(this, "description"),
-            value: inputValues.description
+            value: inputs.description.value
           }}
         />
         <Input
@@ -130,14 +160,17 @@ export default function SparForm({
           textInputConfig={{
             keyboardType: "decimal-pad",
             onChangeText: inputChangedHandler.bind(this, "rating"),
-            value: inputValues.rating
+            value: inputs.rating.value
           }}
         />
+        {formIsInvalid && (
+          <Text style={{ color: "red" }}>Invalid input! Try Again</Text>
+        )}
         <View style={styles.buttonsContainer}>
           <CButton mode="flat" onPress={onCancel} style={styles.button}>
             Cancel
           </CButton>
-          <CButton onPress={submitHandler} style={styles.button}>
+          <CButton mode="" onPress={submitHandler} style={styles.button}>
             {submitButtonLabel}
           </CButton>
         </View>
