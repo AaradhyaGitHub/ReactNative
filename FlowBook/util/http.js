@@ -24,3 +24,11 @@ export async function fetchSpars() {
   }
   return spars;
 }
+
+export function updateSpar(id, sparData) {
+  return axios.put(BACKEND_URL + `/spar/${id}.json`, sparData);
+}
+
+export function deleteSpar(id) {
+  return axios.delete(BACKEND_URL + `/spar/${id}.json`);
+}

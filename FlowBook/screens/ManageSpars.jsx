@@ -6,7 +6,7 @@ import Colors from "../constants/Colors";
 import CButton from "../components/ui/CButton";
 import { SparsContext } from "../store/spars-context";
 import SparForm from "../components/ManageSpars/SparForm";
-import { storeSpar } from "../util/http";
+import { deleteSpar, storeSpar, updateSpar } from "../util/http";
 
 export default function ManageSpars({ route, navigation }) {
   const sparCtx = useContext(SparsContext);
@@ -22,7 +22,8 @@ export default function ManageSpars({ route, navigation }) {
     });
   }, [navigation, isEditing]);
 
-  function DeleteSparLogHandler() {
+  async function DeleteSparLogHandler() {
+    await deleteSpar(editedSparId);
     sparCtx.deleteSpar(editedSparId);
     navigation.goBack();
   }
@@ -32,6 +33,7 @@ export default function ManageSpars({ route, navigation }) {
   async function confirmHandler(sparData) {
     if (isEditing) {
       sparCtx.updateSpar(editedSparId, sparData);
+      await updateSpar(editedSparId, sparData);
     } else {
       const id = await storeSpar(sparData);
       sparCtx.addSpar({ ...sparData, id: id });
