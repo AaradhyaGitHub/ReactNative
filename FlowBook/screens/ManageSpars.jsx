@@ -29,12 +29,12 @@ export default function ManageSpars({ route, navigation }) {
   function cancelHandler() {
     navigation.goBack();
   }
-  function confirmHandler(sparData) {
+  async function confirmHandler(sparData) {
     if (isEditing) {
       sparCtx.updateSpar(editedSparId, sparData);
     } else {
-      storeSpar(sparData);
-      sparCtx.addSpar(sparData);
+      const id = await storeSpar(sparData);
+      sparCtx.addSpar({ ...sparData, id: id });
     }
 
     navigation.goBack();

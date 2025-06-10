@@ -1,8 +1,10 @@
 import axios from "axios";
 const BACKEND_URL = "https://flowbook-533c9-default-rtdb.firebaseio.com/";
 
-export function storeSpar(sparData) {
-  axios.post(BACKEND_URL + "/spar.json", sparData);
+export async function storeSpar(sparData) {
+  const response = await axios.post(BACKEND_URL + "/spar.json", sparData);
+  const id = response.data.name;
+  return id;
 }
 
 export async function fetchSpars() {
