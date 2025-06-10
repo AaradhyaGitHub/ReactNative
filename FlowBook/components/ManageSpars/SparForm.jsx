@@ -43,6 +43,21 @@ function validateDate(dateString) {
   );
 }
 
+function getDateString(dateValue) {
+  if (!dateValue) return "";
+
+  // If it's already a string in YYYY-MM-DD format, return it
+  if (typeof dateValue === "string" && dateValue.match(/^\d{4}-\d{2}-\d{2}$/)) {
+    return dateValue;
+  }
+
+  // If it's a Date object, convert it to YYYY-MM-DD string
+  const date = new Date(dateValue);
+  if (isNaN(date.getTime())) return ""; // Invalid date
+
+  return date.toISOString().split("T")[0]; // Returns YYYY-MM-DD format
+}
+
 export default function SparForm({
   onCancel,
   onSubmit,
@@ -55,7 +70,7 @@ export default function SparForm({
       isValid: true
     },
     date: {
-      value: defaultFormValues ? defaultFormValues.date : "",
+      value: defaultFormValues ? getDateString(defaultFormValues.date) : "",
       isValid: true
     },
     description: {

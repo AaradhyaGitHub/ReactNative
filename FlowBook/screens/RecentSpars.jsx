@@ -5,17 +5,26 @@ import SparsDisplay from "../components/MovesDisplay/SparsDisplay";
 import { SparsContext } from "../store/spars-context";
 import getDateMinusDays from "../util/date";
 import { fetchSpars } from "../util/http";
+import LoadingOverlay from "../components/ui/LoadingOverlay";
 
 export default function RecentSpars() {
+  const [isFetching, setIsFetching] = useState(true);
+
   const sparsCtx = useContext(SparsContext);
 
   useEffect(() => {
     async function getSpars() {
+      setIsFetching(true);
       const spars = await fetchSpars();
+      setIsFetching(false);
       sparsCtx.setSpars(spars);
     }
     getSpars();
   }, []);
+
+  if (isFetching) {
+    return <LoadingOverlay />;
+  }
 
   const recentSpars = sparsCtx.spars.filter((spar) => {
     const today = new Date();
