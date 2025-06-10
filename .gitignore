@@ -64,3 +64,6 @@ Desktop.ini
 
 # TypeScript build output
 **/tsconfig.tsbuildinfo
+
+# Ignore accidental sensitive files
+UserAuth/util/auth.js
