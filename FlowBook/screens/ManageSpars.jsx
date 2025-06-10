@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useContext, useLayoutEffect } from "react";
+import React, { useContext, useLayoutEffect, useState } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import IconButton from "../components/ui/IconButton";
 import Colors from "../constants/Colors";
@@ -7,8 +7,10 @@ import CButton from "../components/ui/CButton";
 import { SparsContext } from "../store/spars-context";
 import SparForm from "../components/ManageSpars/SparForm";
 import { deleteSpar, storeSpar, updateSpar } from "../util/http";
+import LoadingOverlay from "../components/ui/LoadingOverlay";
 
 export default function ManageSpars({ route, navigation }) {
+  const [isSubmitting, setIsSubmmitting] = useState(false);
   const sparCtx = useContext(SparsContext);
 
   const editedSparId = route.params?.sparId;
@@ -23,7 +25,11 @@ export default function ManageSpars({ route, navigation }) {
   }, [navigation, isEditing]);
 
   async function DeleteSparLogHandler() {
+    setIsSubmmitting(true);
     await deleteSpar(editedSparId);
+    //no need for the below line
+    setIsSubmmitting(false);
+
     sparCtx.deleteSpar(editedSparId);
     navigation.goBack();
   }
@@ -31,6 +37,7 @@ export default function ManageSpars({ route, navigation }) {
     navigation.goBack();
   }
   async function confirmHandler(sparData) {
+    setIsSubmmitting(true);
     if (isEditing) {
       sparCtx.updateSpar(editedSparId, sparData);
       await updateSpar(editedSparId, sparData);
@@ -40,6 +47,10 @@ export default function ManageSpars({ route, navigation }) {
     }
 
     navigation.goBack();
+  }
+
+  if (isSubmitting) {
+    return <LoadingOverlay />;
   }
 
   return (
