@@ -6,22 +6,35 @@ import { SparsContext } from "../store/spars-context";
 import getDateMinusDays from "../util/date";
 import { fetchSpars } from "../util/http";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
+import ErroOverlay from "../components/ui/ErrorOverlay";
 
 export default function RecentSpars() {
   const [isFetching, setIsFetching] = useState(true);
+  const [error, setError] = useState();
 
   const sparsCtx = useContext(SparsContext);
 
   useEffect(() => {
     async function getSpars() {
       setIsFetching(true);
-      const spars = await fetchSpars();
+      try {
+        const spars = await fetchSpars();
+        sparsCtx.setSpars(spars);
+      } catch (error) {
+        setError("Failed to fetch spars");
+      }
       setIsFetching(false);
-      sparsCtx.setSpars(spars);
     }
     getSpars();
   }, []);
 
+  function errorHandler() {
+    setError(null);
+  }
+
+  if (error && !! isFetching) {
+    return <ErroOverlay message={error} onConfirm={errorHandler} />;
+  }
   if (isFetching) {
     return <LoadingOverlay />;
   }

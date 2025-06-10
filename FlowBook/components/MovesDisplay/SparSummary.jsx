@@ -7,7 +7,6 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import Colors from "../../constants/Colors";
-import SparItems from "./SparItems";
 
 export default function SparSummary({ spars, periodName }) {
   const sparStats = spars.reduce(

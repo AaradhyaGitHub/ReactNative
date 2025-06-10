@@ -8,9 +8,12 @@ import { SparsContext } from "../store/spars-context";
 import SparForm from "../components/ManageSpars/SparForm";
 import { deleteSpar, storeSpar, updateSpar } from "../util/http";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
+import ErrorOverlay from "../components/ui/ErrorOverlay";
 
 export default function ManageSpars({ route, navigation }) {
   const [isSubmitting, setIsSubmmitting] = useState(false);
+  const [error, setError] = useState();
+
   const sparCtx = useContext(SparsContext);
 
   const editedSparId = route.params?.sparId;
@@ -26,27 +29,37 @@ export default function ManageSpars({ route, navigation }) {
 
   async function DeleteSparLogHandler() {
     setIsSubmmitting(true);
-    await deleteSpar(editedSparId);
-    //no need for the below line
-    setIsSubmmitting(false);
-
-    sparCtx.deleteSpar(editedSparId);
-    navigation.goBack();
+    try {
+      await deleteSpar(editedSparId);
+      sparCtx.deleteSpar(editedSparId);
+      navigation.goBack();
+    } catch (error) {
+      setError("Failed to delete. Please try again later");
+      setIsSubmmitting(false);
+    }
   }
   function cancelHandler() {
     navigation.goBack();
   }
   async function confirmHandler(sparData) {
     setIsSubmmitting(true);
-    if (isEditing) {
-      sparCtx.updateSpar(editedSparId, sparData);
-      await updateSpar(editedSparId, sparData);
-    } else {
-      const id = await storeSpar(sparData);
-      sparCtx.addSpar({ ...sparData, id: id });
-    }
 
-    navigation.goBack();
+    try {
+      if (isEditing) {
+        sparCtx.updateSpar(editedSparId, sparData);
+        await updateSpar(editedSparId, sparData);
+      } else {
+        const id = await storeSpar(sparData);
+        sparCtx.addSpar({ ...sparData, id: id });
+      }
+      navigation.goBack();
+    } catch (error) {
+      setError("Could not save data. Please try again later");
+      setIsSubmmitting(false);
+    }
+  }
+  if (error && !isSubmitting) {
+    return <ErrorOverlay message={error} />;
   }
 
   if (isSubmitting) {

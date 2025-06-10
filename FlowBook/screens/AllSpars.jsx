@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet } from "react-native";
 import SparsDisplay from "../components/MovesDisplay/SparsDisplay";
 import { SparsContext } from "../store/spars-context";
 
