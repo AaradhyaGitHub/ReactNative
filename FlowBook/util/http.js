@@ -6,7 +6,7 @@ export function storeSpar(sparData) {
 }
 
 export async function fetchSpars() {
-  const response = await axios.get(BACKEND_URL + "/spar.jsxon");
+  const response = await axios.get(BACKEND_URL + "/spar.json"); // Fixed typo: was "spar.jsxon"
 
   const spars = [];
 

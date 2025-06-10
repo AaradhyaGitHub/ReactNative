@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useContext, useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import SparsDisplay from "../components/MovesDisplay/SparsDisplay";
 import { SparsContext } from "../store/spars-context";
@@ -12,6 +12,7 @@ export default function RecentSpars() {
   useEffect(() => {
     async function getSpars() {
       const spars = await fetchSpars();
+      sparsCtx.setSpars(spars);
     }
     getSpars();
   }, []);

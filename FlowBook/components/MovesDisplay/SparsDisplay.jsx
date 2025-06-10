@@ -23,7 +23,7 @@ export default function SparsDisplay({ spars, sparsPeriod, fallbackText }) {
 const styles = StyleSheet.create({
   infoText: {
     color: Colors.error,
-    fontSize: 32,
+    fontSize: 22,
     textAlign: "center",
     marginTop: 32
   }
