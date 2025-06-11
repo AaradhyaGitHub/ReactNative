@@ -3,8 +3,7 @@
 import React from "react";
 import { Pressable } from "react-native";
 import { Image } from "react-native";
-import { StyleSheet, Text, View, FlatList } from "react-native";
-import Button from "../../../UserAuth/components/ui/Button";
+import { StyleSheet, Text, View, FlatList, Button } from "react-native";
 
 export default function PlaceItem({ place, onSelect }) {
   return (
