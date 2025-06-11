@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Alert } from "react-native";
 import AuthContent from "../components/Auth/AuthContent";
 import { createUser } from "../util/auth";
@@ -7,12 +7,14 @@ import LoadingOverlay from "../components/ui/LoadingOverlay";
 
 function SignupScreen() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const authCtx = useContext(AuthContent)
 
   async function signupHandler({ email, password }) {
     setIsAuthenticating(true);
     
     try {
       const userData = await createUser(email, password);
+      authCtx.authenticate(userData)
       console.log("Signup successful:", userData);
       
       // Here you would typically:

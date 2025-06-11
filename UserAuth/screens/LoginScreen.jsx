@@ -1,17 +1,20 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Alert } from "react-native";
 import AuthContent from "../components/Auth/AuthContent";
 import LoadingOverlay from "../components/ui/LoadingOverlay";
 import { signInUser } from "../util/auth";
+import { AuthContext } from "../store/auth-context";
 
 function LoginScreen() {
   const [isSigningOn, setIsSigningOn] = useState(false);
+  const authCtx = useContext(AuthContext);
 
   async function signInHandler({ email, password }) {
     setIsSigningOn(true);
 
     try {
       const userData = await signInUser(email, password);
+      authCtx.authenticate(userData);
       console.log("Login successful:", userData);
 
       // Here you would typically:
