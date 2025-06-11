@@ -21,13 +21,16 @@ export default function App() {
     <>
       <StatusBar style="light" />
       <NavigationContainer>
-        <Stack.Navigator initialRouteName="AllPlaces" screenOptions={{
-          headerStyle: {backgroundColor: Colors.surface},
-          headerTintColor: Colors.textPrimary,
-          contentStyle: {
-            backgroundColor: Colors.background
-          }
-        }}>
+        <Stack.Navigator
+          initialRouteName="AllPlaces"
+          screenOptions={{
+            headerStyle: { backgroundColor: Colors.surface },
+            headerTintColor: Colors.textPrimary,
+            contentStyle: {
+              backgroundColor: Colors.background
+            }
+          }}
+        >
           <Stack.Screen
             name="AllPlaces"
             component={AllPlaces}
@@ -35,8 +38,8 @@ export default function App() {
               title: "Your Favorite Places",
               headerRight: ({ tintColor }) => (
                 <IconButton
-                  color={Colors.info}
-                  icon="camera"
+                  color={Colors.accentCool}
+                  icon="create" // or just "add"
                   size={30}
                   onPress={() => {
                     navigation.navigate("AddPlace");
@@ -45,9 +48,13 @@ export default function App() {
               )
             })}
           />
-          <Stack.Screen name="AddPlace" component={AddPlace} options={{
-            title: 'Add a New Place'
-          }}/>
+          <Stack.Screen
+            name="AddPlace"
+            component={AddPlace}
+            options={{
+              title: "Add a New Place"
+            }}
+          />
         </Stack.Navigator>
       </NavigationContainer>
     </>
