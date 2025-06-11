@@ -30,3 +30,7 @@ export default function PlaceItem({ place, onSelect }) {
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+    
+})

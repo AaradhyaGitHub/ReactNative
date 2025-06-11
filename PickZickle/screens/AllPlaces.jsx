@@ -1,11 +1,11 @@
 //------------------ Default Imports -------------------------//
 import React from "react";
-import { StatusBar } from "expo-status-bar";
+import PlacesList from "../components/Places/PlacesList";
 
 export default function AllPlaces(){
     return(
         <>
-            
+            <PlacesList />
         </>
     )
 }
