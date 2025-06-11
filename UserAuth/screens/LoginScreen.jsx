@@ -15,7 +15,7 @@ function LoginScreen() {
     try {
       const userData = await signInUser(email, password);
       authCtx.authenticate(userData);
-      console.log("Login successful:", userData);
+      console.log("Login successful!");
 
       // Here you would typically:
       // - Store the user token
