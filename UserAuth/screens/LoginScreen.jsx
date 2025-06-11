@@ -14,13 +14,18 @@ function LoginScreen() {
 
     try {
       const userData = await signInUser(email, password);
-      authCtx.authenticate(userData);
-      console.log("Login successful!");
+      console.log("Login successful");
+      
+      // Extract the token from userData (Firebase returns idToken)
+      const token = userData.idToken;
+      if (token) {
+        authCtx.authenticate(token);
+        console.log("Token stored and user authenticated");
+      } else {
+        console.log("No token received from Firebase");
+        Alert.alert("Login Error", "Authentication data incomplete. Please try again.");
+      }
 
-      // Here you would typically:
-      // - Store the user token
-      // - Navigate to authenticated screens
-      // - Update global auth state
     } catch (error) {
       console.log("Login error:", error);
       console.log("Error response:", error.response?.data);
