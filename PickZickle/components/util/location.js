@@ -1,4 +1,4 @@
-const API_KEY = "";
+const API_KEY = "test";
 
 export function getMapPreview(lat, lon) {
   const zoom = 14;
