@@ -3,10 +3,9 @@
 import React from "react";
 import { Pressable } from "react-native";
 import { StyleSheet, Text } from "react-native";
-import Octicons from "@expo/vector-icons/Octicons";
+import Ionicons from "@expo/vector-icons/Ionicons";
 
 export default function IconButton({ icon, size, color, onPress }) {
-  console.log("IconButton props:", { icon, size, color });
 
   return (
     <Pressable
@@ -14,8 +13,7 @@ export default function IconButton({ icon, size, color, onPress }) {
       onPress={onPress}
     >
       {/* Debug text - remove this once working */}
-      <Text style={{ color: "red", fontSize: 12 }}>BTN</Text>
-      <Octicons name={icon} size={size} color={color} />
+      <Ionicons name={icon} size={size} color={color} />
     </Pressable>
   );
 }
@@ -24,11 +22,12 @@ const styles = StyleSheet.create({
   button: {
     padding: 8,
     margin: 4,
+    paddingLeft: 10,
     justifyContent: "center",
     alignItems: "center",
     // Fixed: Remove fixed width/height or make them reasonable
-    minWidth: 40,
-    minHeight: 40
+    minWidth: 10,
+    minHeight: 10,
     // Or you can remove width/height entirely and let it size naturally
   },
   pressed: {

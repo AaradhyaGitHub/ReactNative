@@ -67,3 +67,4 @@ Desktop.ini
 
 # Ignore accidental sensitive files
 UserAuth/util/auth.js
+PickZickle/util/location.js

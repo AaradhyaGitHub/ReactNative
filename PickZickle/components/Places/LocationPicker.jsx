@@ -1,5 +1,5 @@
 // @ts-nocheck
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Alert, Button, Image, StyleSheet, Text, View } from "react-native";
 import OutlinedButton from "../ui/OutlinedButton";
 import { Colors } from "../../constants/colors";
@@ -9,13 +9,32 @@ import {
   PermissionStatus
 } from "expo-location";
 import { getMapPreview } from "../util/location";
-import { useNavigation } from "@react-navigation/native";
+import {
+  useNavigation,
+  useRoute,
+  useIsFocused
+} from "@react-navigation/native";
 
 export default function LocationPicker() {
   const navigation = useNavigation();
+  const route = useRoute();
+
   const [pickedLocation, setPickedLocation] = useState();
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions();
+
+  const isFocused = useIsFocused();
+
+  useEffect(() => {
+    if (isFocused && route.params) {
+      const mapPickedLocation = {
+        lat: route.params.pickedLat,
+        lon: route.params.pickedLon
+      };
+      setPickedLocation(mapPickedLocation);
+    }
+  }, [route, isFocused]); // Removed mapPickedLocation from dependencies
+
   async function verifyPermissions() {
     if (locationPermissionInformation.status === PermissionStatus.GRANTED) {
       return true;
@@ -64,6 +83,7 @@ export default function LocationPicker() {
       lon: location.coords.longitude
     });
   }
+  
   function pickOnMapHandler() {
     navigation.navigate("Map");
   }
@@ -79,6 +99,7 @@ export default function LocationPicker() {
       />
     );
   }
+  
   return (
     <View>
       <View style={styles.mapPreview}>{locationPreview}</View>
