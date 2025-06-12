@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "PickZickle",
-    "slug": "PickZickle",
+    "name": "PickZickle-V2",
+    "slug": "PickZickle-V2",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -29,7 +29,7 @@
       [
         "expo-image-picker",
         {
-          "cameraPermission": "Allow accesses to your camera"
+          "cameraPermission": "The app needs access to your camera in order to take photos of your favorite places."
         }
       ]
     ]

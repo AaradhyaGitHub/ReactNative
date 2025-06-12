@@ -36,6 +36,6 @@ const styles = StyleSheet.create({
   },
   fallbackText: {
     fontSize: 24,
-    color: Colors.error
+    color: Colors.textSecondary
   }
 });

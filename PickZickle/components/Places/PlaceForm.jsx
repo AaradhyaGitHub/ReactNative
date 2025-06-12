@@ -1,44 +1,43 @@
 // @ts-nocheck
-//------------------ Default Imports -------------------------//
-import React, { useState } from "react";
-import { TextInput } from "react-native";
-import { ScrollView } from "react-native";
-import { Image } from "react-native";
-import { StyleSheet, Text, View } from "react-native";
+import { useState } from "react";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+
 import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
 
-export default function PlaceForm() {
-  
-  const [title, setTitle] = useState("");
-  function changeTitleHandler(enteredTitle) {
-    setTitle(enteredTitle);
+function PlaceForm() {
+  const [enteredTitle, setEnteredTitle] = useState("");
+
+  function changeTitleHandler(enteredText) {
+    setEnteredTitle(enteredText);
   }
+
   return (
-    <ScrollView style={styles.formContainer}>
+    <ScrollView style={styles.form}>
       <View>
         <Text style={styles.label}>Title</Text>
         <TextInput
           style={styles.input}
           onChangeText={changeTitleHandler}
-          value={title}
+          value={enteredTitle}
         />
       </View>
-
       <ImagePicker />
     </ScrollView>
   );
 }
 
+export default PlaceForm;
+
 const styles = StyleSheet.create({
-  formContainer: {
+  form: {
     flex: 1,
-    padding: 14
+    padding: 24
   },
   label: {
     fontWeight: "bold",
     marginBottom: 4,
-    color: Colors.textPrimary
+    color: Colors.textSecondary
   },
   input: {
     marginVertical: 8,
@@ -46,7 +45,7 @@ const styles = StyleSheet.create({
     paddingVertical: 8,
     fontSize: 16,
     borderBottomWidth: 2,
-    borderRadius: 8,
-    backgroundColor: Colors.info
+    backgroundColor: Colors.accentCool,
+    borderRadius: 8
   }
 });

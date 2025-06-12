@@ -2,17 +2,20 @@
 //------------------ Default Imports -------------------------//
 import React from "react";
 import { Pressable } from "react-native";
-import { Image } from "react-native";
-import { StyleSheet, Text, View, FlatList, Button } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { StyleSheet, Text } from "react-native";
+import Octicons from "@expo/vector-icons/Octicons";
 
 export default function IconButton({ icon, size, color, onPress }) {
+  console.log("IconButton props:", { icon, size, color });
+
   return (
     <Pressable
       style={({ pressed }) => [styles.button, pressed && styles.pressed]}
       onPress={onPress}
     >
-      <Ionicons name={icon} size={size} color={color} />
+      {/* Debug text - remove this once working */}
+      <Text style={{ color: "red", fontSize: 12 }}>BTN</Text>
+      <Octicons name={icon} size={size} color={color} />
     </Pressable>
   );
 }
@@ -23,8 +26,10 @@ const styles = StyleSheet.create({
     margin: 4,
     justifyContent: "center",
     alignItems: "center",
-    width: 50,
-    height: 50
+    // Fixed: Remove fixed width/height or make them reasonable
+    minWidth: 40,
+    minHeight: 40
+    // Or you can remove width/height entirely and let it size naturally
   },
   pressed: {
     opacity: 0.5
