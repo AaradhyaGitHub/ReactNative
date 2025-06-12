@@ -8,7 +8,7 @@ import {
   useForegroundPermissions,
   PermissionStatus
 } from "expo-location";
-import { getMapPreview } from "../util/location";
+import { getMapPreview } from "../../util/location";
 import {
   useNavigation,
   useRoute,
