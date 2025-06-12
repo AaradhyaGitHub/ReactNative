@@ -1,7 +1,6 @@
-//------------------ Default Imports -------------------------//
+//------------------ Enhanced OutlinedButton -------------------------//
 import React from "react";
-import { StatusBar } from "expo-status-bar";
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View, Animated } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import { Colors } from "../../constants/colors";
 
@@ -10,14 +9,14 @@ export default function OutlinedButton({ onPress, icon, children }) {
     <Pressable
       onPress={onPress}
       style={({ pressed }) => [
-        styles.buttonContainer,
+        styles.button,
         pressed && styles.pressed
       ]}
     >
       <Ionicons
         name={icon}
-        size={18}
-        color={Colors.accentWarm}
+        size={20}
+        color={Colors.info}
         style={styles.icon}
       />
       <Text style={styles.text}>{children}</Text>
@@ -26,23 +25,33 @@ export default function OutlinedButton({ onPress, icon, children }) {
 }
 
 const styles = StyleSheet.create({
-  buttonContainer: {
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    margin: 4,
+  button: {
     flexDirection: "row",
-    justifyContent: "center",
     alignItems: "center",
-    borderWidth: 1,
-    borderColor: Colors.accentCool
+    justifyContent: "center",
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    margin: 6,
+    borderRadius: 12,
+    borderWidth: 1.5,
+    borderColor: Colors.border,
+    backgroundColor: "transparent",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 1 },
+    shadowOpacity: 0.05,
+    shadowRadius: 2,
+    elevation: 2,
   },
   pressed: {
-    opacity: 0.4
+    opacity: 0.6,
+    transform: [{ scale: 0.98 }]
   },
   icon: {
-    marginRight: 6
+    marginRight: 8
   },
   text: {
-    color: Colors.textPrimary
+    color: Colors.textPrimary,
+    fontSize: 16,
+    fontWeight: "500"
   }
 });

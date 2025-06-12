@@ -8,6 +8,7 @@ import {
 import { useState } from "react";
 
 import { Colors } from "../../constants/colors";
+import OutlinedButton from "../ui/OutlinedButton";
 
 function ImagePicker() {
   const [pickedImage, setPickedImage] = useState();
@@ -34,8 +35,8 @@ function ImagePicker() {
         "This app needs camera access to take photos. Please grant permission in your device settings.",
         [
           { text: "Cancel", style: "cancel" },
-          { 
-            text: "Try Again", 
+          {
+            text: "Try Again",
             onPress: async () => {
               const permissionResponse = await requestPermission();
               return permissionResponse.granted;
@@ -82,7 +83,16 @@ function ImagePicker() {
   return (
     <View>
       <View style={styles.imagePreview}>{imagePreview}</View>
-      <Button title="Take Image" onPress={takeImageHandler} />
+      <View
+        style={{
+          flexDirection: "column",
+          alignItems: "center"
+        }}
+      >
+        <OutlinedButton icon="camera" onPress={takeImageHandler}>
+          Take Image
+        </OutlinedButton>
+      </View>
     </View>
   );
 }
