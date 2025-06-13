@@ -1,6 +1,6 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
-import { Alert, Button, Image, StyleSheet, Text, View } from "react-native";
+import { Alert, Button, Image, StyleSheet, Text, View, ActivityIndicator } from "react-native";
 import OutlinedButton from "../ui/OutlinedButton";
 import { Colors } from "../../constants/colors";
 import {
@@ -20,6 +20,8 @@ export default function LocationPicker() {
   const route = useRoute();
 
   const [pickedLocation, setPickedLocation] = useState();
+  const [isLoadingLocation, setIsLoadingLocation] = useState(false);
+  const [isLoadingMapPreview, setIsLoadingMapPreview] = useState(false);
   const [locationPermissionInformation, requestPermission] =
     useForegroundPermissions();
 
@@ -33,7 +35,7 @@ export default function LocationPicker() {
       };
       setPickedLocation(mapPickedLocation);
     }
-  }, [route, isFocused]); // Removed mapPickedLocation from dependencies
+  }, [route, isFocused]);
 
   async function verifyPermissions() {
     if (locationPermissionInformation.status === PermissionStatus.GRANTED) {
@@ -52,7 +54,7 @@ export default function LocationPicker() {
     if (locationPermissionInformation.status === PermissionStatus.DENIED) {
       Alert.alert(
         "Location Permission Required",
-        "This app needs location access . Please grant permission in your device settings.",
+        "This app needs location access. Please grant permission in your device settings.",
         [
           { text: "Cancel", style: "cancel" },
           {
@@ -71,32 +73,82 @@ export default function LocationPicker() {
   }
 
   async function getLocationHandler() {
-    const hasPermission = await verifyPermissions();
+    setIsLoadingLocation(true);
+    
+    try {
+      const hasPermission = await verifyPermissions();
 
-    if (!hasPermission) {
-      return;
+      if (!hasPermission) {
+        return;
+      }
+
+      const location = await getCurrentPositionAsync({
+        timeout: 10000, // 10 second timeout
+        accuracy: 6 // Balanced accuracy
+      });
+      
+      setPickedLocation({
+        lat: location.coords.latitude,
+        lon: location.coords.longitude
+      });
+    } catch (error) {
+      console.error("Error getting location:", error);
+      Alert.alert(
+        "Location Error", 
+        "Failed to get your location. Please try again or pick location on map."
+      );
+    } finally {
+      setIsLoadingLocation(false);
     }
-
-    const location = await getCurrentPositionAsync({});
-    setPickedLocation({
-      lat: location.coords.latitude,
-      lon: location.coords.longitude
-    });
   }
   
   function pickOnMapHandler() {
     navigation.navigate("Map");
   }
 
-  let locationPreview = <Text style={{ color: "red" }}>Not Available yet</Text>;
-  if (pickedLocation) {
+  // Handle map preview loading
+  function handleMapPreviewLoadStart() {
+    setIsLoadingMapPreview(true);
+  }
+
+  function handleMapPreviewLoadEnd() {
+    setIsLoadingMapPreview(false);
+  }
+
+  function handleMapPreviewError() {
+    setIsLoadingMapPreview(false);
+    console.warn("Failed to load map preview");
+  }
+
+  let locationPreview = (
+    <Text style={styles.noLocationText}>No location picked yet</Text>
+  );
+
+  if (isLoadingLocation) {
     locationPreview = (
-      <Image
-        style={styles.mapPreviewImage}
-        source={{
-          uri: getMapPreview(pickedLocation.lat, pickedLocation.lon)
-        }}
-      />
+      <View style={styles.loadingContainer}>
+        <ActivityIndicator size="large" color={Colors.accentCool} />
+        <Text style={styles.loadingText}>Getting your location...</Text>
+      </View>
+    );
+  } else if (pickedLocation) {
+    locationPreview = (
+      <View style={styles.imageContainer}>
+        <Image
+          style={styles.mapPreviewImage}
+          source={{
+            uri: getMapPreview(pickedLocation.lat, pickedLocation.lon)
+          }}
+          onLoadStart={handleMapPreviewLoadStart}
+          onLoadEnd={handleMapPreviewLoadEnd}
+          onError={handleMapPreviewError}
+        />
+        {isLoadingMapPreview && (
+          <View style={styles.imageLoadingOverlay}>
+            <ActivityIndicator size="small" color={Colors.accentCool} />
+          </View>
+        )}
+      </View>
     );
   }
   
@@ -104,10 +156,18 @@ export default function LocationPicker() {
     <View>
       <View style={styles.mapPreview}>{locationPreview}</View>
       <View style={styles.actions}>
-        <OutlinedButton icon="location" onPress={getLocationHandler}>
-          Locate User
+        <OutlinedButton 
+          icon="location" 
+          onPress={getLocationHandler}
+          disabled={isLoadingLocation}
+        >
+          {isLoadingLocation ? "Locating..." : "Locate User"}
         </OutlinedButton>
-        <OutlinedButton icon="map" onPress={pickOnMapHandler}>
+        <OutlinedButton 
+          icon="map" 
+          onPress={pickOnMapHandler}
+          disabled={isLoadingLocation}
+        >
           Pick on Map
         </OutlinedButton>
       </View>
@@ -123,7 +183,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: Colors.border,
-    borderRadius: 9
+    borderRadius: 9,
+    overflow: "hidden"
   },
   actions: {
     flexDirection: "row",
@@ -133,5 +194,35 @@ const styles = StyleSheet.create({
   mapPreviewImage: {
     width: "100%",
     height: "100%"
+  },
+  imageContainer: {
+    width: "100%",
+    height: "100%",
+    position: "relative"
+  },
+  imageLoadingOverlay: {
+    position: "absolute",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(255, 255, 255, 0.8)"
+  },
+  loadingContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 12
+  },
+  loadingText: {
+    color: Colors.textSecondary,
+    fontSize: 16,
+    textAlign: "center"
+  },
+  noLocationText: {
+    color: Colors.textSecondary,
+    fontSize: 16,
+    textAlign: "center"
   }
 });
