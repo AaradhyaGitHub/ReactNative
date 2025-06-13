@@ -4,9 +4,10 @@ import * as SQLite from "expo-sqlite";
 const database = SQLite.openDatabase("places.db");
 
 export function init() {
-  database.transaction((tx) => {
-    tx.executeSql(
-      `CREATE TABLE IF NOT EXISTS places (
+  const promise = new Promise((resolve, reject) => {
+    database.transaction((tx) => {
+      tx.executeSql(
+        `CREATE TABLE IF NOT EXISTS places (
             id INTEGER PRIMARY KEY NOT NULL, 
             title TEXT NOT NULL,
             imageUri TEXT NOT NULL,
@@ -14,11 +15,18 @@ export function init() {
             lat REAL NOT NULL, 
             lon REAL NOT NULL
         )`,
-      [],
-      //SUCCESS CALLBACK
-      () => {},
-      //FAILURE CALLBACK
-      (_,error) => {}
-    );
+        [],
+        //SUCCESS CALLBACK
+        () => {
+          resolve();
+        },
+        //FAILURE CALLBACK
+        (_, error) => {
+          reject(error);
+        }
+      );
+    });
   });
+
+  return promise;
 }
