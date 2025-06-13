@@ -47,7 +47,7 @@ export default function PlaceItem({ place, onSelect }) {
             styles.exploreButton,
             pressed && styles.exploreButtonPressed
           ]}
-          onPress={onSelect}
+          onPress={onSelect.bind(this, place.id)}
         >
           <Ionicons name="eye-sharp" size={24} color={Colors.accentCool} />
         </Pressable>
