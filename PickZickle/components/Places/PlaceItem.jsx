@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Pressable } from "react-native";
 import { Image } from "react-native";
 import { StyleSheet, Text, View, FlatList, Button } from "react-native";
-import { Ionicons } from '@expo/vector-icons'; // Add this import for icons
+import { Ionicons } from "@expo/vector-icons"; // Add this import for icons
 import { Colors } from "../../constants/colors"; // Import your color palette
 
 export default function PlaceItem({ place, onSelect }) {
@@ -26,19 +26,23 @@ export default function PlaceItem({ place, onSelect }) {
       <View style={styles.header}>
         <View style={styles.profileSection}>
           <View style={[styles.avatar, styles.avatarGradient]}>
-            <Text style={styles.avatarText}>{place.title.charAt(0).toUpperCase()}</Text>
+            <Text style={styles.avatarText}>
+              {place.title.charAt(0).toUpperCase()}
+            </Text>
             <View style={styles.avatarBorder} />
           </View>
           <View style={styles.profileInfo}>
             <Text style={styles.profileName}>{place.title}</Text>
             <Text style={styles.dateText}>
-              {place.dateCreated ? new Date(place.dateCreated).toLocaleDateString() : "Today"}
+              {place.dateCreated
+                ? new Date(place.dateCreated).toLocaleDateString()
+                : "Today"}
             </Text>
           </View>
         </View>
-        
+
         {/* Explore Button - Top Right */}
-        <Pressable 
+        <Pressable
           style={({ pressed }) => [
             styles.exploreButton,
             pressed && styles.exploreButtonPressed
@@ -49,12 +53,10 @@ export default function PlaceItem({ place, onSelect }) {
         </Pressable>
       </View>
 
-
-
       {/* Image Container */}
       <View style={styles.imageWrapper}>
-        <Image 
-          source={{ uri: place.imageUri }} 
+        <Image
+          source={{ uri: place.imageUri }}
           style={[
             styles.image,
             isPortrait ? styles.portraitImage : styles.landscapeImage
@@ -65,7 +67,9 @@ export default function PlaceItem({ place, onSelect }) {
         {imageLoaded && (
           <View style={styles.imageOverlay}>
             <View style={styles.imageStats}>
-              <Text style={styles.imageStatsText}>📷 {isPortrait ? 'Portrait' : 'Landscape'}</Text>
+              <Text style={styles.imageStatsText}>
+                📷 {isPortrait ? "Portrait" : "Landscape"}
+              </Text>
             </View>
           </View>
         )}
@@ -74,7 +78,10 @@ export default function PlaceItem({ place, onSelect }) {
       {/* Location Display - Under Image */}
       <View style={styles.locationContainer}>
         <Text style={styles.locationText} numberOfLines={2}>
-          📍 <Text style={styles.locationItalic}>{place.address || "Unknown location"}</Text>
+          📍{" "}
+          <Text style={styles.locationItalic}>
+            {place.address || "Unknown location"}
+          </Text>
         </Text>
       </View>
       {/* Content Section */}
@@ -114,54 +121,54 @@ const styles = StyleSheet.create({
     shadowColor: Colors.shadow,
     shadowOffset: {
       width: 0,
-      height: 8,
+      height: 8
     },
     shadowOpacity: 0.12,
     shadowRadius: 16,
     elevation: 8,
-    overflow: 'hidden',
+    overflow: "hidden"
   },
-  
+
   header: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
     paddingHorizontal: 20,
     paddingTop: 20,
     paddingBottom: 8,
-    backgroundColor: Colors.background,
+    backgroundColor: Colors.background
   },
-  
+
   profileSection: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    flex: 1
   },
-  
+
   avatar: {
     width: 48,
     height: 48,
     borderRadius: 24,
     backgroundColor: Colors.info,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     marginRight: 16,
-    position: 'relative',
+    position: "relative"
   },
-  
+
   avatarGradient: {
     shadowColor: Colors.accentCool,
     shadowOffset: {
       width: 0,
-      height: 4,
+      height: 4
     },
     shadowOpacity: 0.3,
     shadowRadius: 8,
-    elevation: 6,
+    elevation: 6
   },
-  
+
   avatarBorder: {
-    position: 'absolute',
+    position: "absolute",
     top: -2,
     left: -2,
     right: -2,
@@ -169,30 +176,30 @@ const styles = StyleSheet.create({
     borderRadius: 26,
     borderWidth: 2,
     borderColor: Colors.accentCool,
-    opacity: 0.3,
+    opacity: 0.3
   },
-  
+
   avatarText: {
     color: Colors.textPrimary,
     fontSize: 20,
-    fontWeight: '800',
+    fontWeight: "800"
   },
-  
+
   profileInfo: {
-    flex: 1,
+    flex: 1
   },
-  
+
   profileName: {
     fontSize: 17,
-    fontWeight: '700',
+    fontWeight: "700",
     color: Colors.textPrimary,
-    marginBottom: 2,
+    marginBottom: 2
   },
-  
+
   dateText: {
     fontSize: 13,
     color: Colors.textSecondary,
-    fontWeight: '500',
+    fontWeight: "500"
   },
 
   // New Explore Button Styles
@@ -201,140 +208,139 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
     backgroundColor: Colors.background,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     shadowColor: Colors.shadow,
     shadowOffset: {
       width: 0,
-      height: 2,
+      height: 2
     },
     shadowOpacity: 0.1,
     shadowRadius: 4,
-    elevation: 3,
+    elevation: 3
   },
 
   exploreButtonPressed: {
     opacity: 0.7,
     transform: [{ scale: 0.95 }],
-    backgroundColor: Colors.accentWarm,
+    backgroundColor: Colors.accentWarm
   },
-  
+
   // Location Styles (under image)
   locationContainer: {
     paddingHorizontal: 20,
     paddingVertical: 12,
-    alignItems: 'center',
+    alignItems: "center"
   },
-  
+
   locationText: {
     fontSize: 14,
-    color: 'white',
-    fontWeight: '300',
-    textAlign: 'center',
+    color: "white",
+    fontWeight: "300",
+    textAlign: "center"
   },
 
   locationItalic: {
-    fontStyle: 'italic',
+    fontStyle: "italic"
   },
-  
+
   imageWrapper: {
-    position: 'relative',
-    minHeight: 200,
+    position: "relative",
+    minHeight: 200
   },
-  
+
   image: {
-    width: '100%',
-    minHeight: 200,
+    width: "100%",
+    minHeight: 200
   },
-  
+
   portraitImage: {
     height: 350,
-    resizeMode: 'contain',
+    resizeMode: "contain"
   },
-  
+
   landscapeImage: {
     height: undefined,
     aspectRatio: undefined,
-    resizeMode: 'contain',
+    resizeMode: "contain"
   },
-  
+
   imageOverlay: {
-    position: 'absolute',
+    position: "absolute",
     top: 16,
-    left: 16,
+    left: 16
   },
-  
+
   imageStats: {
-    backgroundColor: 'rgba(0,0,0,0.6)',
-    paddingHorizontal: 12,
+    backgroundColor: "rgba(0,0,0,0.6)",
+    paddingHorizontal: 6,
     paddingVertical: 6,
-    borderRadius: 20,
+    borderRadius: 20
   },
-  
+
   imageStatsText: {
-    color: 'white',
+    color: "white",
     fontSize: 12,
-    fontWeight: '600',
+    fontWeight: "600"
   },
-  
+
   content: {
     paddingHorizontal: 20,
-    paddingVertical: 20,
+    paddingVertical: 20
   },
-  
+
   captionContainer: {
     paddingVertical: 16,
     paddingHorizontal: 0,
     borderBottomWidth: 1,
-    borderBottomColor: 'rgba(255,255,255,0.2)',
+    borderBottomColor: "rgba(255,255,255,0.2)"
   },
-  
+
   caption: {
     fontSize: 15,
     lineHeight: 22,
     color: Colors.textPrimary,
-    textAlign: 'center',
-    fontStyle: 'italic',
-    fontWeight: '400',
+    textAlign: "center",
+    fontStyle: "italic",
+    fontWeight: "400"
   },
-  
+
   captionPlaceholder: {
     paddingVertical: 12,
     paddingHorizontal: 16,
-    backgroundColor: 'rgba(0,0,0,0.02)',
+    backgroundColor: "rgba(0,0,0,0.02)",
     borderRadius: 8,
     borderWidth: 1,
     borderColor: Colors.textSecondary,
-    borderStyle: 'dashed',
+    borderStyle: "dashed"
   },
-  
+
   captionPlaceholderText: {
     fontSize: 14,
     color: Colors.textSecondary,
-    fontStyle: 'italic',
+    fontStyle: "italic"
   },
 
   // Post Separator Styles
   postSeparator: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     paddingHorizontal: 20,
-    paddingVertical: 16,
-    marginTop: 8,
+    marginTop: 8
   },
 
   separatorLine: {
     flex: 1,
     height: 1,
     backgroundColor: Colors.textSecondary,
-    opacity: 0.2,
+    opacity: 0.2
   },
 
   separatorDots: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
     marginHorizontal: 16,
-    gap: 6,
+    gap: 6
   },
 
   dot: {
@@ -342,6 +348,6 @@ const styles = StyleSheet.create({
     height: 4,
     borderRadius: 2,
     backgroundColor: Colors.accentWarm,
-    opacity: 0.6,
-  },
+    opacity: 0.6
+  }
 });
