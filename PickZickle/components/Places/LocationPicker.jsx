@@ -1,6 +1,14 @@
 // @ts-nocheck
 import React, { useEffect, useState } from "react";
-import { Alert, Button, Image, StyleSheet, Text, View, ActivityIndicator } from "react-native";
+import {
+  Alert,
+  Button,
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  ActivityIndicator
+} from "react-native";
 import OutlinedButton from "../ui/OutlinedButton";
 import { Colors } from "../../constants/colors";
 import {
@@ -15,7 +23,7 @@ import {
   useIsFocused
 } from "@react-navigation/native";
 
-export default function LocationPicker() {
+export default function LocationPicker({ onPickLocation }) {
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -36,6 +44,10 @@ export default function LocationPicker() {
       setPickedLocation(mapPickedLocation);
     }
   }, [route, isFocused]);
+
+  useEffect(() => {
+    onPickLocation(pickedLocation);
+  }, [pickedLocation, onPickLocation]);
 
   async function verifyPermissions() {
     if (locationPermissionInformation.status === PermissionStatus.GRANTED) {
@@ -74,7 +86,7 @@ export default function LocationPicker() {
 
   async function getLocationHandler() {
     setIsLoadingLocation(true);
-    
+
     try {
       const hasPermission = await verifyPermissions();
 
@@ -86,7 +98,7 @@ export default function LocationPicker() {
         timeout: 10000, // 10 second timeout
         accuracy: 6 // Balanced accuracy
       });
-      
+
       setPickedLocation({
         lat: location.coords.latitude,
         lon: location.coords.longitude
@@ -94,14 +106,14 @@ export default function LocationPicker() {
     } catch (error) {
       console.error("Error getting location:", error);
       Alert.alert(
-        "Location Error", 
+        "Location Error",
         "Failed to get your location. Please try again or pick location on map."
       );
     } finally {
       setIsLoadingLocation(false);
     }
   }
-  
+
   function pickOnMapHandler() {
     navigation.navigate("Map");
   }
@@ -151,20 +163,20 @@ export default function LocationPicker() {
       </View>
     );
   }
-  
+
   return (
     <View>
       <View style={styles.mapPreview}>{locationPreview}</View>
       <View style={styles.actions}>
-        <OutlinedButton 
-          icon="location" 
+        <OutlinedButton
+          icon="location"
           onPress={getLocationHandler}
           disabled={isLoadingLocation}
         >
           {isLoadingLocation ? "Locating..." : "Locate User"}
         </OutlinedButton>
-        <OutlinedButton 
-          icon="map" 
+        <OutlinedButton
+          icon="map"
           onPress={pickOnMapHandler}
           disabled={isLoadingLocation}
         >

@@ -1,5 +1,5 @@
 // @ts-nocheck
-import { useState, useLayoutEffect } from "react";
+import { useState, useLayoutEffect, useCallback } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -12,13 +12,31 @@ function PlaceForm() {
   const navigation = useNavigation();
   const [enteredTitle, setEnteredTitle] = useState("");
   const [pickedImage, setPickedImage] = useState(); // Lifted state
+  const [pickLocation, setPickLocation] = useState(); // Lifted state
 
   function changeTitleHandler(enteredText) {
     setEnteredTitle(enteredText);
   }
+  function pickImageHandler(imageUri) {
+    setPickedImage(imageUri);
+  }
+
+  const pickLocationHandler = useCallback((location) => {
+    setPickLocation(location); // ✅ This sets it to the new location parameter
+  }, []);
 
   function savePlaceHandler() {
-    // Handle save logic here
+    console.log(
+      `
+        ----------------------------------------
+        The entered Title was: ${enteredTitle},
+        ----------------------------------------
+        The image was: ${pickedImage},
+        ----------------------------------------
+        The location was: ${JSON.stringify(pickLocation, null, 2)}
+        ----------------------------------------
+      `
+    );
   }
 
   useLayoutEffect(() => {
@@ -45,7 +63,7 @@ function PlaceForm() {
         />
       </View>
       <ImagePicker pickedImage={pickedImage} onImagePicked={setPickedImage} />
-      <LocationPicker />
+      <LocationPicker onPickLocation={pickLocationHandler} />
     </ScrollView>
   );
 }
