@@ -1,3 +1,4 @@
+// @ts-nocheck
 //------------------ Default Imports -------------------------//
 import React, { useEffect, useState } from "react";
 import { ScrollView, Pressable } from "react-native";
@@ -7,16 +8,23 @@ import OutlinedButton from "../components/ui/OutlinedButton";
 import { Colors } from "../constants/colors";
 import { fetchPlaceById } from "../util/database";
 
-export default function PlaceDetails({ route }) {
+export default function PlaceDetails({ route, navigation }) {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [imageAspectRatio, setImageAspectRatio] = useState(1);
   const [isLiked, setIsLiked] = useState(false);
+
+  const [fetchedPlace, setFetchedPlace] = useState([]);
 
   const selectedPlaceId = route.params.placeId;
 
   useEffect(() => {
     async function loadPlaceDetail() {
-      await fetchPlaceById(selectedPlaceId);
+      const place = await fetchPlaceById(selectedPlaceId);
+      setFetchedPlace(place);
+
+      navigation.setOptions({
+        title: place.title
+      });
     }
     loadPlaceDetail();
   }, [selectedPlaceId]);
@@ -37,6 +45,23 @@ export default function PlaceDetails({ route }) {
     setIsLiked(!isLiked);
   }
 
+  if (!fetchedPlace) {
+    return (
+      <View>
+        <Text
+          style={{
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+            color: Colors.accentWarm
+          }}
+        >
+          Loading Place Data
+        </Text>
+      </View>
+    );
+  }
+
   return (
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header */}
@@ -49,7 +74,7 @@ export default function PlaceDetails({ route }) {
       <View style={styles.imageWrapper}>
         <Image
           source={{
-            uri: "https://via.placeholder.com/400x300/4A90E2/FFFFFF?text=Beautiful+Place"
+            uri: fetchedPlace.imageUri
           }}
           style={[
             styles.image,
@@ -63,19 +88,13 @@ export default function PlaceDetails({ route }) {
       {/* Location */}
       <View style={styles.locationContainer}>
         <Text style={styles.locationText}>
-          📍{" "}
-          <Text style={styles.locationItalic}>
-            1234 Mountain View Drive, Scenic Valley, CA 90210
-          </Text>
+          📍 <Text style={styles.locationItalic}>{fetchedPlace.address}</Text>
         </Text>
       </View>
 
       {/* Caption */}
       <View style={styles.captionContainer}>
-        <Text style={styles.caption}>
-          "What an incredible sunset at this amazing viewpoint! The colors were
-          absolutely breathtaking."
-        </Text>
+        <Text style={styles.caption}>{fetchedPlace.title}</Text>
       </View>
 
       {/* Actions */}
