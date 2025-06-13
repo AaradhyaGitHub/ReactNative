@@ -1,6 +1,6 @@
 // @ts-nocheck
 export class Place {
-  constructor(title, imageUri, location) {
+  constructor(title, imageUri, location, id) {
     this.title = title;
     this.imageUri = imageUri;
 
@@ -16,6 +16,6 @@ export class Place {
       this.location = { lat: 0, lon: 0 };
     }
 
-    this.id = new Date().toString() + Math.random().toString();
+    this.id = id;
   }
 }

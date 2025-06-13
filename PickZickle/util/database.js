@@ -1,5 +1,6 @@
 // @ts-nocheck
 import * as SQLite from "expo-sqlite";
+import { Place } from "../models/places";
 
 // Open database using the new API
 const database = SQLite.openDatabaseSync("places.db");
@@ -46,7 +47,55 @@ export function insertPlace(place) {
   });
   return promise;
 }
+export function fetchPlaces() {
+  const promise = new Promise((resolve, reject) => {
+    try {
+      const result = database.getAllSync("SELECT * FROM places");
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+  return promise;
+}
 
+// Alternative async version (cleaner)
+export async function fetchPlacesAsync() {
+  try {
+    const result = await database.getAllAsync("SELECT * FROM places");
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
+
+// If you want to fetch a single place by ID
+export function fetchPlaceById(id) {
+  const promise = new Promise((resolve, reject) => {
+    try {
+      const result = database.getFirstSync(
+        "SELECT * FROM places WHERE id = ?",
+        [id]
+      );
+      resolve(result);
+    } catch (error) {
+      reject(error);
+    }
+  });
+  return promise;
+}
+// Async version for single place
+export async function fetchPlaceByIdAsync(id) {
+  try {
+    const result = await database.getFirstAsync(
+      "SELECT * FROM places WHERE id = ?",
+      [id]
+    );
+    return result;
+  } catch (error) {
+    throw error;
+  }
+}
 // Alternative async version (if you prefer async/await)
 export async function initAsync() {
   try {

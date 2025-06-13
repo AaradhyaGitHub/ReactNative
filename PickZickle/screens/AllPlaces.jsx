@@ -3,19 +3,27 @@ import React, { useEffect, useState } from "react";
 import PlacesList from "../components/Places/PlacesList";
 import FloatingAddButton from "../components/ui/FloatingAddButton";
 import { useIsFocused } from "@react-navigation/native";
+import { fetchPlaces } from "../util/database";
 
 export default function AllPlaces({ navigation, route }) {
-  const [loadedPlaces, setLoadedPlaces] = useState([]); // ← Initialize as empty array
+  const [loadedPlaces, setLoadedPlaces] = useState([]);
 
   const isFocused = useIsFocused();
+
   useEffect(() => {
-    if (isFocused && route.params) {
-      setLoadedPlaces((currentPlaces) => [
-        ...currentPlaces, // ← Now this works because currentPlaces is always an array
-        route.params.place
-      ]);
+    async function loadPlaces() {
+      try {
+        const places = await fetchPlaces();
+        setLoadedPlaces(places);
+      } catch (error) {
+        console.error("Error loading places:", error);
+      }
     }
-  }, [isFocused, route]);
+
+    if (isFocused) {
+      loadPlaces();
+    }
+  }, [isFocused]);
 
   return (
     <>
