@@ -73,11 +73,30 @@ export async function fetchPlacesAsync() {
 export function fetchPlaceById(id) {
   const promise = new Promise((resolve, reject) => {
     try {
-      const result = database.getFirstSync(
+      const dbPlace = database.getFirstSync(
         "SELECT * FROM places WHERE id = ?",
         [id]
       );
-      resolve(result);
+
+      // Check if place exists
+      if (!dbPlace) {
+        reject(new Error(`Place with id ${id} not found`));
+        return;
+      }
+
+      // Transform the database result to match your Place model
+      const place = new Place(
+        dbPlace.title,
+        dbPlace.imageUri,
+        {
+          lat: dbPlace.lat,
+          lon: dbPlace.lon,
+          address: dbPlace.address
+        },
+        dbPlace.id // ← Fixed: was db.id, should be dbPlace.id
+      );
+
+      resolve(place); // ← Fixed: resolve the transformed place, not raw result
     } catch (error) {
       reject(error);
     }
@@ -132,4 +151,3 @@ export async function insertPlaceAsync(place) {
     throw error;
   }
 }
-

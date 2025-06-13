@@ -38,7 +38,10 @@ export default function PlaceDetails({ route, navigation }) {
   const isPortrait = imageAspectRatio < 1;
 
   function showOnMapHandler() {
-    navigation.navigate("Map");
+    navigation.navigate("Map", {
+      initialLat: fetchedPlace.location.lat,
+      initialLon: fetchedPlace.location.lon
+    });
   }
 
   function shareHandler() {}
@@ -74,11 +77,7 @@ export default function PlaceDetails({ route, navigation }) {
             <Text style={styles.date}>June 12, 2025</Text>
           </View>
           <Pressable style={styles.mapButton} onPress={showOnMapHandler}>
-            <Ionicons
-              name="map-outline"
-              size={24}
-              color={Colors.textPrimary}
-            />
+            <Ionicons name="map-outline" size={24} color={Colors.textPrimary} />
           </Pressable>
         </View>
       </View>
