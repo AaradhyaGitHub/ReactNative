@@ -13,16 +13,13 @@ export default function PlacesList({ places }) {
       </View>
     );
   }
+
   return (
     <>
       <FlatList
         data={places}
-        keyExtractor={(item) => {
-          item.id;
-        }}
-        renderItem={({ item }) => {
-          <PlaceItem place={item} />;
-        }}
+        keyExtractor={(item) => item.id} // ✅ Return the id directly
+        renderItem={({ item }) => <PlaceItem place={item} />} // ✅ Return the component directly
       />
     </>
   );
