@@ -1,6 +1,14 @@
 // @ts-nocheck
 import { useState, useLayoutEffect, useCallback } from "react";
-import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  View,
+  KeyboardAvoidingView,
+  Platform
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
 import { Colors } from "../../constants/colors";
@@ -22,6 +30,7 @@ function PlaceForm() {
   }
 
   const pickLocationHandler = useCallback((location) => {
+    console.log("pickLocationHandler called with:", location);
     setPickLocation(location); // ✅ This sets it to the new location parameter
   }, []);
 
@@ -53,27 +62,51 @@ function PlaceForm() {
   }, [navigation, savePlaceHandler]);
 
   return (
-    <ScrollView style={styles.form}>
-      <View>
-        <Text style={styles.label}>Title</Text>
-        <TextInput
-          style={styles.input}
-          onChangeText={changeTitleHandler}
-          value={enteredTitle}
-        />
-      </View>
-      <ImagePicker pickedImage={pickedImage} onImagePicked={setPickedImage} />
-      <LocationPicker onPickLocation={pickLocationHandler} />
-    </ScrollView>
+    <KeyboardAvoidingView
+      style={styles.container}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+    >
+      <ScrollView
+        style={styles.form}
+        contentContainerStyle={styles.scrollContent}
+        showsVerticalScrollIndicator={true}
+        keyboardShouldPersistTaps="handled"
+      >
+        <View>
+          <Text style={styles.label}>Title</Text>
+          <TextInput
+            style={styles.input}
+            onChangeText={changeTitleHandler}
+            value={enteredTitle}
+          />
+        </View>
+        <View style={styles.imageContainer}>
+          <ImagePicker
+            pickedImage={pickedImage}
+            onImagePicked={setPickedImage}
+          />
+        </View>
+        <View style={styles.locationContainer}>
+          <LocationPicker onPickLocation={pickLocationHandler} />
+        </View>
+      </ScrollView>
+    </KeyboardAvoidingView>
   );
 }
 
 export default PlaceForm;
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  },
   form: {
     flex: 1,
     padding: 24
+  },
+  scrollContent: {
+    flexGrow: 1,
+    paddingBottom: 50 // Extra padding at bottom to ensure content is accessible
   },
   label: {
     fontWeight: "bold",
@@ -89,5 +122,12 @@ const styles = StyleSheet.create({
     backgroundColor: Colors.border,
     borderRadius: 8,
     color: Colors.textPrimary
+  },
+  imageContainer: {
+    marginVertical: 8
+  },
+  locationContainer: {
+    marginVertical: 8,
+    minHeight: 120 // Ensure minimum space for location buttons
   }
 });
