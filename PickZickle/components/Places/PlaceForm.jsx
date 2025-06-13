@@ -7,7 +7,8 @@ import {
   TextInput,
   View,
   KeyboardAvoidingView,
-  Platform
+  Platform,
+  Alert
 } from "react-native";
 import { useNavigation } from "@react-navigation/native";
 
@@ -15,8 +16,9 @@ import { Colors } from "../../constants/colors";
 import ImagePicker from "./ImagePicker";
 import LocationPicker from "./LocationPicker";
 import IconButton from "../ui/IconButton";
+import { Place } from "../../models/places";
 
-function PlaceForm() {
+function PlaceForm({ onCreatePlace }) {
   const navigation = useNavigation();
   const [enteredTitle, setEnteredTitle] = useState("");
   const [pickedImage, setPickedImage] = useState(); // Lifted state
@@ -35,6 +37,20 @@ function PlaceForm() {
   }, []);
 
   function savePlaceHandler() {
+    
+    // Add validation
+    if (!enteredTitle.trim()) {
+      Alert.alert("Invalid Input", "Please enter a title for the place.");
+      return;
+    }
+
+    if (!pickLocation) {
+      Alert.alert("Invalid Input", "Please pick a location.");
+      return;
+    }
+
+    const placeData = new Place(enteredTitle, pickedImage, pickLocation);
+    onCreatePlace(placeData);
     console.log(
       `
         ----------------------------------------

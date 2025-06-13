@@ -47,12 +47,30 @@ export default function LocationPicker({ onPickLocation }) {
 
   useEffect(() => {
     async function handleAddress() {
+      console.log("handleAddress called with pickedLocation:", pickedLocation);
       if (pickedLocation) {
-        const address = await getAddress(
+        console.log(
+          "Getting address for:",
           pickedLocation.lat,
           pickedLocation.lon
         );
-        onPickLocation({...pickedLocation, address});
+        try {
+          const address = await getAddress(
+            pickedLocation.lat,
+            pickedLocation.lon
+          );
+          console.log("Address received:", address);
+          const locationWithAddress = { ...pickedLocation, address };
+          console.log("Calling onPickLocation with:", locationWithAddress);
+          onPickLocation(locationWithAddress);
+        } catch (error) {
+          console.error("Error getting address:", error);
+          // Still call onPickLocation with location but without address
+          onPickLocation({
+            ...pickedLocation,
+            address: "Address not available"
+          });
+        }
       }
     }
     handleAddress();
