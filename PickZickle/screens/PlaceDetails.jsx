@@ -37,7 +37,9 @@ export default function PlaceDetails({ route, navigation }) {
 
   const isPortrait = imageAspectRatio < 1;
 
-  function showOnMapHandler() {}
+  function showOnMapHandler() {
+    navigation.navigate("Map");
+  }
 
   function shareHandler() {}
 
@@ -66,8 +68,19 @@ export default function PlaceDetails({ route, navigation }) {
     <ScrollView style={styles.container} showsVerticalScrollIndicator={false}>
       {/* Header */}
       <View style={styles.header}>
-        <Text style={styles.title}>Beautiful Mountain Vista</Text>
-        <Text style={styles.date}>June 12, 2025</Text>
+        <View style={styles.headerContent}>
+          <View style={styles.titleDateContainer}>
+            <Text style={styles.title}>{fetchedPlace.title}</Text>
+            <Text style={styles.date}>June 12, 2025</Text>
+          </View>
+          <Pressable style={styles.mapButton} onPress={showOnMapHandler}>
+            <Ionicons
+              name="map-outline"
+              size={24}
+              color={Colors.textPrimary}
+            />
+          </Pressable>
+        </View>
       </View>
 
       {/* Main Image */}
@@ -119,10 +132,6 @@ export default function PlaceDetails({ route, navigation }) {
             />
           </Pressable>
         </View>
-
-        <OutlinedButton icon="map" onPress={showOnMapHandler}>
-          View On Map
-        </OutlinedButton>
       </View>
     </ScrollView>
   );
@@ -139,6 +148,16 @@ const styles = StyleSheet.create({
     paddingBottom: 16
   },
 
+  headerContent: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start"
+  },
+
+  titleDateContainer: {
+    flex: 1
+  },
+
   title: {
     fontSize: 24,
     fontWeight: "800",
@@ -150,6 +169,25 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: Colors.textSecondary,
     fontWeight: "500"
+  },
+
+  mapButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    backgroundColor: Colors.background,
+    borderWidth: 1.5,
+    borderColor: Colors.textSecondary,
+    justifyContent: "center",
+    alignItems: "center",
+    shadowColor: Colors.shadow,
+    shadowOffset: {
+      width: 0,
+      height: 2
+    },
+    shadowOpacity: 0.1,
+    shadowRadius: 4,
+    elevation: 3
   },
 
   // Image Section - Same as PlaceItem
