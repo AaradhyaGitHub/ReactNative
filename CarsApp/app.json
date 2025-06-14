@@ -14,17 +14,25 @@
       "backgroundColor": "#ffffff"
     },
     "ios": {
+      "iosbuildNumber": "1.0.0",
       "supportsTablet": true
     },
     "android": {
+      "versionCode": 1,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.logx4.mycargarage"
     },
     "web": {
       "favicon": "./assets/favicon.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "bcb2ffc9-7a37-4171-902a-da5186e6524d"
+      }
     }
   }
 }
