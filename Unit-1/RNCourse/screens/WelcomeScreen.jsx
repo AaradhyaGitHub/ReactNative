@@ -3,6 +3,8 @@ import React from "react";
 import { Text, View, StyleSheet, Button } from "react-native";
 import * as Notifications from "expo-notifications";
 
+Notifications.setNotificationHandler();
+
 export default function WelcomeScreen() {
   function scheduleNotificationHandler() {
     Notifications.scheduleNotificationAsync({
@@ -13,7 +15,7 @@ export default function WelcomeScreen() {
         vibrate: true
       },
       trigger: {
-        seconds: 7,
+        seconds: 7
       }
     });
   }
