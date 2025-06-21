@@ -8,8 +8,8 @@ Notifications.setNotificationHandler({
     return {
       shouldPlaySound: true,
       shouldSetBadge: false,
-      shouldShowBanner: true, // Replaces shouldShowAlert
-      shouldShowList: true // Shows in notification list
+      shouldShowBanner: true,
+      shouldShowList: true
     };
   }
 });
@@ -17,31 +17,45 @@ Notifications.setNotificationHandler({
 export default function WelcomeScreen() {
   useEffect(() => {
     async function configurePushNotifications() {
-      const { status } = await Notifications.getPermissionsAsync();
-      let finalStatus = status;
+      try {
+        // Get current permissions
+        const { status } = await Notifications.getPermissionsAsync();
+        let finalStatus = status;
 
-      if (finalStatus !== "granted") {
-        //ask for permission
-        Notifications.requestPermissionsAsync();
-        finalStatus = status;
-      }
+        // Request permissions if not granted
+        if (finalStatus !== "granted") {
+          const { status: newStatus } = await Notifications.requestPermissionsAsync();
+          finalStatus = newStatus;
+        }
 
-      if (finalStatus !== "granted") {
-        Alert.alert(
-          "Permission Required!",
-          "Push notifications need the appropriate permissions"
-        );
-        return;
+        if (finalStatus !== "granted") {
+          Alert.alert(
+            "Permission Required!",
+            "Push notifications need the appropriate permissions"
+          );
+          return;
+        }
+
+        // Get push token - this will only work in development builds, not Expo Go
+        try {
+          const pushTokenData = await Notifications.getExpoPushTokenAsync();
+          console.log(`Push Token: ${pushTokenData.data}`);
+        } catch (tokenError) {
+          console.log("Error getting push token:", tokenError);
+          console.log("Note: Push tokens only work in development builds, not Expo Go");
+        }
+
+      } catch (error) {
+        console.log("Error configuring push notifications:", error);
       }
-      const pushTokenData = await Notifications.getExpoPushTokenAsync();
-      console.log(pushTokenData);
     }
 
     configurePushNotifications();
 
+    // Set up Android notification channel
     if (Platform.OS === "android") {
-      Notifications.setNotificationChannelAsync('default', {
-        name: 'default',
+      Notifications.setNotificationChannelAsync("default", {
+        name: "default",
         importance: Notifications.AndroidImportance.DEFAULT
       });
     }
@@ -50,47 +64,30 @@ export default function WelcomeScreen() {
   useEffect(() => {
     console.log("Setting up notification listeners");
 
-    let subscriptionReceived;
-    let subscriptionResponse;
+    // Set up notification listeners
+    const subscriptionReceived = Notifications.addNotificationReceivedListener(
+      (notification) => {
+        console.log("Notification Received");
+        console.log("Notification data:", notification.request.content.data);
+        console.log(
+          "User name:",
+          notification.request.content.data?.userName
+        );
+      }
+    );
 
-    const setupListeners = () => {
-      subscriptionReceived = Notifications.addNotificationReceivedListener(
-        (notification) => {
-          console.log("Notification Received");
-          console.log("Notification data:", notification.request.content.data);
-          console.log(
-            "User name:",
-            notification.request.content.data?.userName
-          );
-        }
-      );
-
-      subscriptionResponse =
-        Notifications.addNotificationResponseReceivedListener((response) => {
-          console.log("Notification tapped/responded to");
-          console.log("Response:", response);
-        });
-    };
-
-    setupListeners();
+    const subscriptionResponse =
+      Notifications.addNotificationResponseReceivedListener((response) => {
+        console.log("Notification tapped/responded to");
+        console.log("Response:", response);
+      });
 
     return () => {
       console.log("Cleaning up notification listeners");
-      // Ensure subscriptions exist before removing
-      if (
-        subscriptionReceived &&
-        typeof subscriptionReceived.remove === "function"
-      ) {
-        subscriptionReceived.remove();
-      }
-      if (
-        subscriptionResponse &&
-        typeof subscriptionResponse.remove === "function"
-      ) {
-        subscriptionResponse.remove();
-      }
+      subscriptionReceived.remove();
+      subscriptionResponse.remove();
     };
-  }, []); // Empty dependency array is crucial - prevents re-running on every render
+  }, []);
 
   function scheduleNotificationHandler() {
     Notifications.scheduleNotificationAsync({
@@ -98,8 +95,6 @@ export default function WelcomeScreen() {
         title: "My first local notification",
         body: "This is the body",
         data: { userName: "Ryan" }
-        // Note: vibrate is not a standard property for content
-        // Vibration is typically handled by the system based on user settings
       },
       trigger: {
         seconds: 5
@@ -116,6 +111,9 @@ export default function WelcomeScreen() {
         title="Schedule Notification"
         onPress={scheduleNotificationHandler}
       />
+      <Text style={styles.warning}>
+        Note: Push tokens only work in development builds, not Expo Go
+      </Text>
     </View>
   );
 }
@@ -125,10 +123,17 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: "center",
     alignItems: "center",
-    gap: 20
+    gap: 20,
+    padding: 20
   },
   highlight: {
     color: "#4a99fb",
     fontSize: 20
+  },
+  warning: {
+    color: "#ff6b6b",
+    fontSize: 12,
+    textAlign: "center",
+    marginTop: 10
   }
 });
